@@ -1,6 +1,6 @@
 [project]
 # UPDATE THIS BEFORE PUBLISHING
-name = "{{ cookiecutter.project_name }}"
+name = "{{ cookiecutter.contribution_name }}"
 description = "{{ cookiecutter.project_short_description }}"
 authors = [{ name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" }]
 version = "{{ cookiecutter.version }}"
