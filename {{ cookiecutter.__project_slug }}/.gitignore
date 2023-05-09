@@ -63,7 +63,7 @@ dmypy.json
 
 # Material for MkDocs
 site/
-{{ cookiecutter.project_slug }}/docs/reference/
+docs/reference/
 
 # Jupyter Notebook load data
 .ipynb_checkpoints
