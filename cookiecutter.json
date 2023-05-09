@@ -1,0 +1,13 @@
+{
+  "full_name": "First Middle Last",
+  "email": "email@example.com",
+  "github_username": "ghusername",
+  "autora_contribution_type": ["theorist", "experimentalist"],
+  "contribution_name": "contribution name",
+  "project_short_description": "Short description",
+  "project_slug": "autora-{{ cookiecutter.autora_contribution_type }}-{{ cookiecutter.contribution_name.lower().replace(' ', '_') }}",
+  "repository": "Repository URL",
+  "pypi_username": "{{ cookiecutter.github_username }}",
+  "version": "0.1.0",
+  "open_source_license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"]
+}
