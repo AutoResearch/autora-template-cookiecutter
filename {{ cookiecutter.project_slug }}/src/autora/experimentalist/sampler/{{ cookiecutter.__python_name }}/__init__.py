@@ -18,9 +18,9 @@ def example_sampler(
     *Optional*
     Examples:
         These examples add documentations and also work as doctests
-        >>> {{ cookiecutter.contribution_name }}([1, 2, 3, 4])
+        >>> {{ cookiecutter.__python_name }}([1, 2, 3, 4])
         1
-        >>> {{ cookiecutter.contribution_name }}(range(3, 10))
+        >>> {{ cookiecutter.__python_name }}(range(3, 10))
         3
 
     """
