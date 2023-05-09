@@ -21,7 +21,10 @@ if __name__ == '__main__':
 
     if 'experimentalist' in '{{ cookiecutter.autora_contribution_type|lower }}':
         remove_dir('src/autora/theorist')
+        remove_file('tests/test_theorist_example.py')
 
     if 'theorist' in '{{ cookiecutter.autora_contribution_type|lower }}':
         remove_dir('src/autora/experimentalist')
+        remove_file('tests/test_experimentalist_pooler_example.py')
+        remove_file('tests/test_experimentalist_sampler_example.py')
 
