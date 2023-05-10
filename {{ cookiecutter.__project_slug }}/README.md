@@ -36,7 +36,7 @@ An sklearn regressor that returns an interpretable model relating experiment con
 observations $Y$.<br>
 *Example: The [Bayesian Machine Scientist](https://github.com/AutoResearch/autora-theorist-bms) (Guimerà et al., 2020, 
 in Science Advances) returns an equation governing the relationship between $X$ and $Y$.* <br>
-{% endif %}
+{% endif -%}
 {% if cookiecutter.autora_contribution_type == "experimentalist" -%}
 ### Experimentalist
 A method that identifies novel experiment conditions $X'$ that yield scientific merit. 
