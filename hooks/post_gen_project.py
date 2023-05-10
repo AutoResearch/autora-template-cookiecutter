@@ -73,38 +73,67 @@ def prompt_with_options(prompt: str,
 if __name__ == '__main__':
 
     if 'experimentalist' in '{{ cookiecutter.autora_contribution_type|lower }}':
-        list_remove = ['src/autora/theorist',
-                       'src/autora/experiment_runner',
+        # Base files to remove
+        list_remove = ['src/autora/experiment_runner',
+                       'src/autora/synthetic_data',
+                       'src/autora/theorist',
                        'tests/test_theorist_example.py',
                        ]
-        answer = input("What type of experimentalist?")
+        # Additional files to remove based on user options
+        prompt = 'What type of experimentalist?'
+        options = {'pooler': ['src/autora/experimentalist/sampler',
+                              'tests/test_experimentalist_sampler_example.py',
+                              ],
+                   'sampler': ['src/autora/experimentalist/pooler',
+                               'tests/test_experimentalist_pooler_example.py',
+                               ]
+                   }
+        # Prompt user for option and extend removal list
+        list_remove.extend(
+            prompt_with_options(prompt=prompt,
+                                return_options=options)
+        )
 
-        valid = False
-        while not valid:
-            print(f'Input: {answer}')
-            if answer == 'pooler':
-                list_remove.extend(['src/autora/experimentalist/sampler',
-                                    'tests/test_experimentalist_sampler_example.py',
-                                    ])
-                valid = True
-            elif answer == 'sampler':
-                list_remove.extend(['src/autora/experimentalist/pooler',
-                                    'tests/test_experimentalist_pooler_example.py',
-                                    ])
-                valid = True
-            else:
-                print(f"Invalid option. Choose from [pooler, sampler]")
-                answer = input("What type of experimentalist?")
+    elif 'experiment_runner' in '{{ cookiecutter.autora_contribution_type|lower }}':
+        # Base files to remove
+        list_remove = ['src/autora/experimentalist',
+                       'src/autora/theorist',
+                       'tests/test_experimentalist_pooler_example.py',
+                       'tests/test_experimentalist_sampler_example.py',
+                       'tests/test_theorist_example.py',
+                       ]
+        # Additional files to remove based on user options
+        prompt = 'What component of the experiment runner?'
+        options = {
+            'base experiment runner': [
+                'src/autora/experiment_runner/recruitment_manager',
+                'src/autora/experiment_runner/experimentation_manager',
+            ],
+            'experimentation manager': [
+                'src/autora/experiment_runner/{{ cookiecutter.__python_name }}',
+                'src/autora/experiment_runner/recruitment_manager',
+            ],
+            'recruitment manager': [
+                'src/autora/experiment_runner/{{ cookiecutter.__python_name }}',
+                'src/autora/experiment_runner/experimentation_manager',
+            ],
+        }
+        # Prompt user for option and extend removal list
+        list_remove.extend(
+            prompt_with_options(prompt=prompt,
+                                return_options=options)
+        )
 
-    if 'theorist' in '{{ cookiecutter.autora_contribution_type|lower }}':
+    elif 'theorist' in '{{ cookiecutter.autora_contribution_type|lower }}':
         list_remove = ['src/autora/experimentalist',
                        'src/autora/experiment_runner',
                        'tests/test_experimentalist_pooler_example.py',
                        'tests/test_experimentalist_sampler_example.py',
                        ]
 
-    if 'experiment_runner' in '{{ cookiecutter.autora_contribution_type|lower }}':
-        list_remove = ['src/autora/experimentalist',
+    elif 'synthetic_data' in '{{ cookiecutter.autora_contribution_type|lower }}':
+        list_remove = ['src/autora/experiment_runner',
+                       'src/autora/experimentalist',
                        'src/autora/theorist',
                        'tests/test_experimentalist_pooler_example.py',
                        'tests/test_experimentalist_sampler_example.py',
