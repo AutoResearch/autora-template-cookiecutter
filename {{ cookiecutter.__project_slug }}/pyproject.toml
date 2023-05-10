@@ -3,7 +3,7 @@
 name = "{{ cookiecutter.contribution_name }}"
 description = "{{ cookiecutter.project_short_description }}"
 authors = [{ name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" }]
-version = "{{ cookiecutter.version }}"
+{% if cookiecutter.use_dynamic_versioning == "yes" %}dynamic = ["version"]{% else %}version = "0.1.0"{% endif %}
 
 readme = "README.md"
 license = { text = "{{ cookiecutter.license }}" }
@@ -25,6 +25,10 @@ homepage = "http://www.empiricalresearch.ai"
 repository = "{{ cookiecutter.repository }}"
 documentation = "https://autoresearch.github.io/autora/"
 
+
 [build-system]
-requires = ["setuptools"]
+{% if cookiecutter.use_dynamic_versioning == "yes" %}requires = ["setuptools", "setuptools_scm"]{% else %}requires = ["setuptools"]{% endif %}
 build-backend = "setuptools.build_meta"
+
+{% if cookiecutter.use_dynamic_versioning == "yes" %}[tool.setuptools_scm]
+{% endif %}

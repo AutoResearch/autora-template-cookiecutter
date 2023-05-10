@@ -140,6 +140,9 @@ if __name__ == '__main__':
                        'tests/test_theorist_example.py',
                        ]
 
+    if '{{ cookiecutter.use_github_actions }}' == 'no':
+        list_remove.extend(['.github'])
+
     for path_remove in list_remove:
         try:
             remove_path(path_remove)
