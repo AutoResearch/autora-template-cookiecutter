@@ -2,6 +2,7 @@
 import os
 import shutil
 import sys
+from typing import Dict
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
@@ -14,6 +15,59 @@ def remove_path(path):
             shutil.rmtree(path)
         else:
             os.remove(os.path.join(PROJECT_DIRECTORY, path))
+
+
+def create_option_text(options: Dict):
+    """
+    Creates a text block from a dictionary in the format of:
+    '''
+    {key_0} - {value_0}
+    {key_1} - {value_1}
+    ...
+    {key_n} - {value_n}
+    Choose from {key_0, key_1, ..., key_n}:
+    '''
+    Args:
+        options: Dictionary as options.
+
+    Returns:
+
+    """
+    string_options = ''
+    for key, value in options.items():
+        string_options = f"{string_options}{key} - {value}\n"
+
+    final_line = f"Choose from {str(list(map(int, options.keys()))).strip('[').strip(']')}: "
+    string_out = string_options + final_line
+    return string_out
+
+
+def prompt_with_options(prompt: str,
+                        return_options: Dict):
+    """
+    Generates a user input request based from a prompt and dictionary of return options.
+    The function will ask the user for a numerical selection of one of the dictionary keys based
+    on order. The value of the dictionary will be returned.
+
+    Args:
+        prompt: Question to ask the user
+        return_options: Dictionary with {option name: return value} as key-value pairs.
+
+    Returns:
+    Selected value from dictionary.
+    """
+    # Create text prompt
+    d_options = {str(i+1): s for i, s in enumerate(return_options.keys())}
+    option_prompt = create_option_text(d_options)
+    full_prompt = f"{prompt}\n{option_prompt}"
+
+    # Ask for input
+    user_input = input(full_prompt)
+    if user_input in d_options:
+        return_values = return_options[d_options[user_input]]
+        return return_values
+    else:
+        return prompt_with_options(prompt, return_options)
 
 
 if __name__ == '__main__':
