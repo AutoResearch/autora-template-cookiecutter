@@ -29,28 +29,25 @@ pip install -e ".[dev]"
 dependencies are vital to your package, you will have to add them to the ``pyproject.toml`` (see Step 6 of the 
 Contribution Guide).*
 
-## Contribution Guide 
-
-{% if cookiecutter.autora_contribution_type == "theorist" %}
-### **Theorist**
+## Contribution Guide
+{% if cookiecutter.autora_contribution_type == "theorist" -%}
+### Theorist
 An sklearn regressor that returns an interpretable model relating experiment conditions $X$ to 
 observations $Y$.<br>
 *Example: The [Bayesian Machine Scientist](https://github.com/AutoResearch/autora-theorist-bms) (Guimerà et al., 2020, 
 in Science Advances) returns an equation governing the relationship between $X$ and $Y$.* <br>
 {% endif %}
-
-{% if cookiecutter.autora_contribution_type == "experimentalist" %}
-### **Experimentalist** 
+{% if cookiecutter.autora_contribution_type == "experimentalist" -%}
+### Experimentalist
 A method that identifies novel experiment conditions $X'$ that yield scientific merit. 
 Experimentalists may either be implemented as a *pooler* (generating a pool of novel experiment conditions) or as a 
 sampler (selecting from an existing pool of experiment conditions $X$).<br>
 *Example: The [Novelty Sampler](https://github.com/AutoResearch/autora-novelty-sampler) selects novel experiment 
 conditions $X'$ with respect to a pairwise distance metric applied to existing experiment conditions $X$.*
 <br>
-{% endif %}
-
-{% if cookiecutter.autora_contribution_type == "experiment_runner" %}
-### **Experiment Runners** 
+{% endif -%}
+{% if cookiecutter.autora_contribution_type == "experiment_runner" -%}
+### Experiment Runners
 A method that orchestrates the collecting of observations for a given set of 
 experiment conditions, which may include the recruitment of participants.<br>
 *Example: The [Firebase-Prolific Runner](https://github.com/AutoResearch/autora-experiment-runner-firebase-prolific) 
@@ -63,19 +60,16 @@ enables the recruitment of participants via Prolific.*<br>
 (b) **Experimentation Manager**: A method (or collection of methods) to handle the requisite experimentation processes.<br>
 *Example: The [Firebase Experimentation Manager](https://github.com/AutoResearch/autora-experiment-runner-experimentation-manager-firebase)
 enables the hosting of a web-based experiment on Firebase and the storage of conditions and observations via Firestore.*<br>
-{% endif %}
-
-{% if cookiecutter.autora_contribution_type == "synthetic_data" %}
-### **Synthetic Data** 
+{% endif -%}
+{% if cookiecutter.autora_contribution_type == "synthetic_data" -%}
+### Synthetic Data 
 A ground-truth model that implements a hypothesized relationship between experimental conditions
 $X$ and observations $Y$. Synthetic models may act as objects of study for which the underlying mechanisms are known, 
 and be used for benchmarking theorists and experimentalists in AutoRA in terms of
 their ability to recover the underlying model from synthetic data, e.g., by acting as "synthetic participants".
 *Example: The basic [Synthetic Data Package](https://github.com/AutoResearch/autora-synthetic-data) implements simple 
 models of economic choice and psychophysics.*
-{% endif %}
-
-
+{% endif -%}
 ### Step 1: Implement Your Code
 
 You may now add a folder in the respective feature category. For instance, if you would like to implement
@@ -124,20 +118,21 @@ the package is still in progress.
 #### Step 5.1: Update Metadata
 
 To begin publishing your package, update the metadata under `project` in the pyproject.toml file to include 
-- name, 
-- description, 
-- author-name, 
-- author-email, and 
-- version.
+- name
+- description
+- author-name
+- author-email
+{% if cookiecutter.use_dynamic_versioning == "no" -%}
+- version
+{% endif -%}
 
 Also, update the URL for the repository under `project.urls`.
 
-There are at least two options for publishing the package. For beginners, we recommend Option 1 (via Github Actions) 
-as it is easier to follow.
+{% if cookiecutter.use_github_actions == "yes" -%}
+#### Step 5.2 Publish via GitHub Actions
 
-#### Step 5.2 (Option 1): Publish via GitHub Actions
-
-To automate the publishing process for your package, you can use a GitHub action instead of Twine:
+To automate the publishing process for your package, you can use a GitHub action:
+- Add a github secret in your repository named PYPI_API_TOKEN, that contains a pyPI token of your account
 - Add the GitHub action to the `.github/workflows` directory: For example, you can use the default publishing action:
   - Navigate to the `actions` on the GitHub website of your repository.
   - Search for the `Publish Python Package` action and add it to your project
@@ -146,48 +141,27 @@ To automate the publishing process for your package, you can use a GitHub action
 - Generate release notes automatically by clicking `generate release`, which adds the markdown of the merged pull requests and the contributors.
 - If this is a pre-release check the box `set as pre-release`
 - Click on `publish release`
-
-
-#### Step 5.2 (Option 2): Publish via Twine
-
+{% else -%}
+#### Step 5.2: Publish via Twine
 You can follow the guide here: https://packaging.python.org/en/latest/tutorials/packaging-projects/
- 
-Then, build the package using:
-```shell
-python -m build
-```
-
-Publish the package to PyPI using `twine`:
-```shell
-twine upload dist/*
-```
-
-
-#### Step 5.3 (Optional): Dynamic Versioning
-To automatically generate the version number for each release, you can use dynamic versioning instead of updating the version number manually. To set this up, you need to alter the `pyproject.toml` file:
-- Replace `version = "..."` with `dynamic = ["version"]` under `project`
-- Replace the `build-system` section with the following:
-```toml
-[build-system]
-requires = ["setuptools", "setuptools_scm"]
-build-backend = "setuptools.build_meta"
-```
-- Add a new section to the `pyproject.toml` file:
-```toml
-[tool.setuptools_scm]
-```
-#### Dynamic Versioning: Publishing via GitHub Actions
-You can use dynamic versioning with the GitHub action described in the previous section. The workflow remains the same, 
-but you don't have to update the version in the `pyproject.toml` file.
-
-#### Dynamic Versioning: Publishing Using `twine`
+{% if cookiecutter.use_dynamic_versioning == "yes" -%}
+#### Dynamic versioning
 If you are using dynamic versioning with Twine, follow these steps to publish your package:
 - Commit all of your changes.
 - Tag the commit: Create an annotated Git tag at the commit you want to release. This is typically the most recent 
 commit on your main branch. For example, you can run `git tag -a 1.0.0a` to create a tag named "1.0.0a" at the 
 current commit.
-- Build and release the package using Twine as described in the above section.
- 
+{% endif -%}
+- Build the package using:
+```shell
+python -m build
+```
+- Publish the package to PyPI using `twine`:
+```shell
+twine upload dist/*
+```
+{% endif -%}
+
 ## Questions & Help
 
 If you have any questions or require any help, please add your question in the 
