@@ -2,7 +2,7 @@
   "full_name": "First Middle Last",
   "email": "email@example.com",
   "github_username": "<github username>",
-  "autora_contribution_type": ["theorist", "experimentalist"],
+  "autora_contribution_type": ["theorist", "experimentalist", "experiment_runner", "synthetic_data"],
   "contribution_name": "<contribution name>",
   "project_short_description": "<Short description>",
   "repository": "<Repository URL>",
