@@ -6,7 +6,7 @@ repo_url: '{{ cookiecutter.repository }}'
 
 nav:
 - Home: 'index.md'
-- Quickstart: 'quick-start.md'
+- Quickstart: 'quickstart.md'
 - Examples:
   - Basic Usage: 'basic-usage.ipynb'
   - Additional Example: 'additional-example.ipynb'
