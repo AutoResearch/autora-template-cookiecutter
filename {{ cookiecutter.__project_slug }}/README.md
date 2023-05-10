@@ -31,59 +31,52 @@ Contribution Guide).*
 
 ## Contribution Guide 
 
-### Step 1: Choose Feature Category
-
-First you have to choose **which type of feature** you would like to add to AutoRA. There are four categories of contributions:<br>
-
-(1)  **Theorist**: An sklearn regressor that returns an interpretable model relating experiment conditions $X$ to 
+{% if cookiecutter.autora_contribution_type == "theorist" %}
+### **Theorist**
+An sklearn regressor that returns an interpretable model relating experiment conditions $X$ to 
 observations $Y$.<br>
 *Example: The [Bayesian Machine Scientist](https://github.com/AutoResearch/autora-theorist-bms) (Guimerà et al., 2020, 
 in Science Advances) returns an equation governing the relationship between $X$ and $Y$.* <br>
+{% endif %}
 
-(2)  **Experimentalist**: A method that identifies novel experiment conditions $X'$ that yield scientific merit. 
+{% if cookiecutter.autora_contribution_type == "experimentalist" %}
+### **Experimentalist** 
+A method that identifies novel experiment conditions $X'$ that yield scientific merit. 
 Experimentalists may either be implemented as a *pooler* (generating a pool of novel experiment conditions) or as a 
 sampler (selecting from an existing pool of experiment conditions $X$).<br>
 *Example: The [Novelty Sampler](https://github.com/AutoResearch/autora-novelty-sampler) selects novel experiment 
 conditions $X'$ with respect to a pairwise distance metric applied to existing experiment conditions $X$.*
 <br>
+{% endif %}
 
-(3) **Experiment Runners**: A method that orchestrates the collecting of observations for a given set of 
-experiment conditions.<br>
+{% if cookiecutter.autora_contribution_type == "experiment_runner" %}
+### **Experiment Runners** 
+A method that orchestrates the collecting of observations for a given set of 
+experiment conditions, which may include the recruitment of participants.<br>
 *Example: The [Firebase-Prolific Runner](https://github.com/AutoResearch/autora-experiment-runner-firebase-prolific) 
 enables the collection of behavioral data from human participants via web-based experiments hosted on 
 [Firebase](https://firebase.google.com/), using a pool of participants registered through
 [Prolific](https://www.prolific.co/).* <br>
+(a) **Recruitment Manager**: A method (or collection of methods) to recruit participants.<br>
+*Example: The [Prolific Recruitment Manager](https://github.com/AutoResearch/autora-experiment-runner-recruitment-manager-prolific)
+enables the recruitment of participants via Prolific.*<br>
+(b) **Experimentation Manager**: A method (or collection of methods) to handle the requisite experimentation processes.<br>
+*Example: The [Firebase Experimentation Manager](https://github.com/AutoResearch/autora-experiment-runner-experimentation-manager-firebase)
+enables the hosting of a web-based experiment on Firebase and the storage of conditions and observations via Firestore.*<br>
+{% endif %}
 
-(3) **Synthetic Data**: A ground-truth model that implements a hypothesized relationship between experimental conditions
+{% if cookiecutter.autora_contribution_type == "synthetic_data" %}
+### **Synthetic Data** 
+A ground-truth model that implements a hypothesized relationship between experimental conditions
 $X$ and observations $Y$. Synthetic models may act as objects of study for which the underlying mechanisms are known, 
 and be used for benchmarking theorists and experimentalists in AutoRA in terms of
 their ability to recover the underlying model from synthetic data, e.g., by acting as "synthetic participants".
 *Example: The basic [Synthetic Data Package](https://github.com/AutoResearch/autora-synthetic-data) implements simple 
 models of economic choice and psychophysics.*
+{% endif %}
 
-### Step 2: Delete Irrelevant Files
 
-Depending on which feature you want to contribute, you can remove initialization files from all irrelevant features.
-You may delete the following initialization files from the template:
-
-- Theorist: ``src/autora/theorist/example_theorist/__init__.py``
-- Experimentalist (Pooler): ``src/autora/experimentalist/pooler/example_pooler/__init__.py``
-- Experimentalist (Sampler): ``src/autora/experimentalist/sampler/example_sampler/__init__.py``
-- Experiment Runner: ``src/autora/experiment_runner/example_runner/__init__.py``
-- Synthetic Data: ``src/autora/synthetic/example_data/__init__.py``
-
-In addition, you may delete the following test files from the template:
-
-- Theorist: ``tests/test_theorist_example.py``
-- Experimentalist (Pooler): ``tests/test_experimentalist_pooler_example.py``
-- Experimentalist (Sampler): ``tests/test_experimentalist_sampler_example.py``
-
-For instance, if you would like to implement an experimentalist sampler, then you may remove all files listed above 
-except for 
-- ``src/autora/experimentalist/sampler/example_sampler/__init__.py`` and 
-- ``tests/test_experimentalist_sampler_example.py``.
-
-### Step 3: Implement Your Code
+### Step 1: Implement Your Code
 
 You may now add a folder in the respective feature category. For instance, if you would like to implement
 and experimentalist sampler, then you may rename the subfolder ``example_sampler`` in 
@@ -93,7 +86,7 @@ in the ``__init__.py''' if it is implemented elswhere.
 
 *Note: You can create folders for new categories if none of the existing feature categories seems fitting.*
 
-### Step 4 (Optional): Add Tests
+### Step 2 (Optional): Add Tests
 
 It is highly encouraged to add unit tests to ensure your code is working as intended. These can be [doctests](https://docs.python.org/3/library/doctest.html) or as test cases in `tests/test_your_contribution_name.py`.
 For example, if you are implementing an experiment sampler, you may rename and modify the 
@@ -103,17 +96,17 @@ For example, if you are implementing an experiment sampler, you may rename and m
 [autora](https://github.com/AutoResearch/autora) package. However, regardless of whether you choose to implement tests, 
 you will still be able to install your package separately, in addition to autora.* 
 
-### Step 5 (Optional): Add Documentation
+### Step 3 (Optional): Add Documentation
 
 It is highly encouraged that you add documentation of your package in your `docs/index.md`. You can also add new pages 
 in the `docs` folder. Update the `mkdocs.yml` file to reflect structure of the documentation. For example, you can add 
 new pages or delete pages that you deleted from the `docs` folder.
 
-*Note: Docmentation is required if you wish that your feature becomes part of the main 
+*Note: Documentation is required if you wish that your feature becomes part of the main 
 [autora](https://github.com/AutoResearch/autora) package. However, regardless of whether you choose to write
 documentation, you will still be able to install your package separately, in addition to autora.*
 
-### Step 6: Add Dependencies
+### Step 4: Add Dependencies
 
 In pyproject.toml add the new dependencies under `dependencies`
 
@@ -122,13 +115,13 @@ Install the added dependencies
 pip install -e ".[dev]"
 ```
 
-### Step 7: Publish Your Package
+### Step 5: Publish Your Package
 
 Once your project is implemented, you may publish it as subpackage of AutoRA. If you have not thoroughly vetted your project or would otherwise like to refine it further, you may 
 nervous about the state of your package–you will be able to publish it as a pre-release, indicating to users that
 the package is still in progress.
 
-#### Step 7.1: Update Metadata
+#### Step 5.1: Update Metadata
 
 To begin publishing your package, update the metadata under `project` in the pyproject.toml file to include 
 - name, 
@@ -142,7 +135,7 @@ Also, update the URL for the repository under `project.urls`.
 There are at least two options for publishing the package. For beginners, we recommend Option 1 (via Github Actions) 
 as it is easier to follow.
 
-#### Step 7.2 (Option 1): Publish via GitHub Actions
+#### Step 5.2 (Option 1): Publish via GitHub Actions
 
 To automate the publishing process for your package, you can use a GitHub action instead of Twine:
 - Add the GitHub action to the `.github/workflows` directory: For example, you can use the default publishing action:
@@ -155,7 +148,7 @@ To automate the publishing process for your package, you can use a GitHub action
 - Click on `publish release`
 
 
-#### Step 7.2 (Option 2): Publish via Twine
+#### Step 5.2 (Option 2): Publish via Twine
 
 You can follow the guide here: https://packaging.python.org/en/latest/tutorials/packaging-projects/
  
@@ -170,7 +163,7 @@ twine upload dist/*
 ```
 
 
-#### Step 7.3 (Optional): Dynamic Versioning
+#### Step 5.3 (Optional): Dynamic Versioning
 To automatically generate the version number for each release, you can use dynamic versioning instead of updating the version number manually. To set this up, you need to alter the `pyproject.toml` file:
 - Replace `version = "..."` with `dynamic = ["version"]` under `project`
 - Replace the `build-system` section with the following:
