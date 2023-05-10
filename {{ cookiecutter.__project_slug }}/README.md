@@ -132,7 +132,7 @@ Also, update the URL for the repository under `project.urls`.
 #### Step 5.2 Publish via GitHub Actions
 
 To automate the publishing process for your package, you can use a GitHub action:
-- Add a github secret in your repository named PYPI_API_TOKEN, that contains a pyPI token of your account
+- Add a github secret in your repository named PYPI_API_TOKEN, that contains a PyPI token of your account
 - Add the GitHub action to the `.github/workflows` directory: For example, you can use the default publishing action:
   - Navigate to the `actions` on the GitHub website of your repository.
   - Search for the `Publish Python Package` action and add it to your project
