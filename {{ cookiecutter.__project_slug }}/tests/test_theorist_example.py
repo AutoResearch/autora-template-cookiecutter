@@ -1,4 +1,4 @@
-from autora.theorist.example_theorist import ExampleRegressor
+from autora.theorist.{{ cookiecutter.__python_name }} import ExampleRegressor
 
 
 def test():

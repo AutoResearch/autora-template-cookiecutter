@@ -1,4 +1,4 @@
-from autora.experimentalist.sampler.example_sampler import example_sampler
+from autora.experimentalist.sampler.{{ cookiecutter.__python_name }} import example_sampler
 import numpy as np
 
 # Note: We encourage you to write more functionality tests for your sampler.

@@ -1,4 +1,4 @@
-from autora.experimentalist.pooler.example_pooler import example_pool
+from autora.experimentalist.pooler.{{ cookiecutter.__python_name }} import example_pool
 
 # Note: We encourage you to adjust this test and write more functionality tests for your pooler.
 
