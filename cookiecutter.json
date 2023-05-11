@@ -3,7 +3,7 @@
   "email": "email@example.com",
   "autora_contribution_type": ["theorist", "experimentalist", "experiment_runner", "synthetic_data", "custom"],
   "custom_autora_contribution_type": "{% if cookiecutter.autora_contribution_type == 'custom' -%}<custom_autora_contribution_type>{% else -%}N/A - Press Enter to Skip{% endif -%}",
-  "__autora_contribution_type": "{% if cookiecutter.autora_contribution_type == 'custom' -%}{{ cookiecutter.custom_autora_contribution_type }}{% else -%}{{ cookiecutter.autora_contribution_type }}{% endif -%}",
+  "__autora_contribution_type": "{% if cookiecutter.autora_contribution_type == 'custom' -%}{{ cookiecutter.custom_autora_contribution_type }}{% else -%}{{ cookiecutter.autora_contribution_type }}{% endif -%}",  
   "experimentalist_type": [
     "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}sampler{% else -%}N/A - Press Enter to Skip{% endif -%}", 
     "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}pooler{% else -%}N/A - Press Enter to Skip{% endif -%}", 
@@ -14,14 +14,16 @@
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner{% else -%}N/A - Press Enter to Skip{% endif -%}", 
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}participation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}", 
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to Skip{% endif -%}"],
-  "__contribution_subtype": "{% if cookiecutter.__autora_contribution_type == 'experimentalist' -%}{{ cookiecutter.__experimentalist_type }}{% elif cookiecutter.__autora_contribution_type == 'experiment_runner' and cookiecutter.experiement_runner_type != 'experiment_runner' -%}{{ cookiecutter.experiement_runner_type }}{% else -%}not-applicable{% endif -%}",
+  "__contribution_subtype": "{% if cookiecutter.__autora_contribution_type == 'experimentalist' -%}{{ cookiecutter.__experimentalist_type }}{% elif cookiecutter.__autora_contribution_type == 'experiment_runner' and cookiecutter.experiement_runner_type != 'experiment_runner' -%}{{ cookiecutter.experiement_runner_type }}{% else -%}not_applicable{% endif -%}",
   "contribution_name": "<contribution name>",
   "project_short_description": "<Short description>",
   "repository": "<Repository URL>",
   "use_dynamic_versioning": ["yes", "no"],
   "use_github_actions": ["yes", "no"],
+  "use_pre_commit_hooks": ["yes", "no"],
   "license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
-  "__full_path": "{{ cookiecutter.autora_contribution_type }}-{% if cookiecutter.__contribution_subtype != 'not-applicable' -%}{{ cookiecutter.__contribution_subtype }}-{% endif -%}{{ cookiecutter.contribution_name.lower().replace(' ', '-') }}",
-  "__project_slug": "autora-{{ cookiecutter.__full_path }}",
+  "__full_path": "{{ cookiecutter.__autora_contribution_type.lower().replace(' ', '_').replace('-', '_') }}/{% if cookiecutter.__contribution_subtype != 'not_applicable' -%}{{ cookiecutter.__contribution_subtype.lower().replace(' ','_').replace('-','_') }}/{% endif -%}{{ cookiecutter.contribution_name.lower().replace(' ', '_').replace('-','_') }}",
+  "__full_name": "{{ cookiecutter.__autora_contribution_type.lower().replace(' ', '-') }}-{% if cookiecutter.__contribution_subtype != 'not_applicable' -%}{{ cookiecutter.__contribution_subtype.lower().replace(' ', '-') }}-{% endif -%}{{ cookiecutter.contribution_name.lower().replace(' ', '-') }}",
+  "__project_slug": "autora-{{ cookiecutter.__full_name }}",
   "__python_name": "{{ cookiecutter.contribution_name.lower().replace(' ', '_').replace('-', '_') }}"
 }

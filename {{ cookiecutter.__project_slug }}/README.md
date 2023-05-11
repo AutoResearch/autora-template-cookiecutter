@@ -2,6 +2,14 @@
 
 ## Quickstart Guide
 
+### Create GitHub Repository
+
+You should create a GitHub repository from the root folder of this project:
+- Create a new repository on GitHub with (You probably want to name the repository {{ cookiecutter.__project_slug }})
+- Follow the guide under `…or push an existing repository from the command line
+` 
+
+### Virtual Environment 
 Install this in an environment using your chosen package manager. In this example we are using virtualenv
 
 Install:
@@ -20,6 +28,8 @@ Activate it:
 source venv/bin/activate
 ```
 
+### Install dev Dependencies
+
 Use `pip install` to install the current project (`"."`) in editable mode (`-e`) with dev-dependencies (`[dev]`):
 ```shell
 pip install -e ".[dev]"
@@ -30,23 +40,24 @@ dependencies are vital to your package, you will have to add them to the ``pypro
 Contribution Guide).*
 
 ## Contribution Guide
+
 {% if cookiecutter.autora_contribution_type == "theorist" -%}
 ### Theorist
 An sklearn regressor that returns an interpretable model relating experiment conditions $X$ to 
 observations $Y$.<br>
 *Example: The [Bayesian Machine Scientist](https://github.com/AutoResearch/autora-theorist-bms) (Guimerà et al., 2020, 
 in Science Advances) returns an equation governing the relationship between $X$ and $Y$.* <br>
-{% endif -%}
-{% if cookiecutter.autora_contribution_type == "experimentalist" -%}
-### Experimentalist
-A method that identifies novel experiment conditions $X'$ that yield scientific merit. 
-Experimentalists may either be implemented as a *pooler* (generating a pool of novel experiment conditions) or as a 
-sampler (selecting from an existing pool of experiment conditions $X$).<br>
+{% elif cookiecutter.autora_contribution_type == "experimentalist" -%}
+### Experimentalist {{ cookiecutter.__experimentalist_type.capitalize() }}
+A method that identifies novel experiment conditions $X'$ that yield scientific merit.
+{% if cookiecutter.__experimentalist_type == "pooler" -%} 
+*Pooler* generate a pool of novel experiment conditions.
+{% elif cookiecutter.__experimentalist_type == "sampler" -%}
+*Sampler* select from an existing pool of experiment conditions $X$).<br>
 *Example: The [Novelty Sampler](https://github.com/AutoResearch/autora-novelty-sampler) selects novel experiment 
 conditions $X'$ with respect to a pairwise distance metric applied to existing experiment conditions $X$.*
-<br>
 {% endif -%}
-{% if cookiecutter.autora_contribution_type == "experiment_runner" -%}
+{% elif cookiecutter.autora_contribution_type == "experiment_runner" -%}
 ### Experiment Runners
 A method that orchestrates the collecting of observations for a given set of 
 experiment conditions, which may include the recruitment of participants.<br>
@@ -54,37 +65,33 @@ experiment conditions, which may include the recruitment of participants.<br>
 enables the collection of behavioral data from human participants via web-based experiments hosted on 
 [Firebase](https://firebase.google.com/), using a pool of participants registered through
 [Prolific](https://www.prolific.co/).* <br>
-(a) **Recruitment Manager**: A method (or collection of methods) to recruit participants.<br>
+{% if cookiecutter.experiement_runner_type == "recruitment_manager" -%}
+*Recruitment Manager* is a method (or collection of methods) to recruit participants.<br>
 *Example: The [Prolific Recruitment Manager](https://github.com/AutoResearch/autora-experiment-runner-recruitment-manager-prolific)
-enables the recruitment of participants via Prolific.*<br>
-(b) **Experimentation Manager**: A method (or collection of methods) to handle the requisite experimentation processes.<br>
+enables the recruitment of participants via Prolific.*
+{% elif cookiecutter.experiement_runner_type == "participation_manager" -%}
+*Experimentation Manager* is a method (or collection of methods) to handle the requisite experimentation processes.<br>
 *Example: The [Firebase Experimentation Manager](https://github.com/AutoResearch/autora-experiment-runner-experimentation-manager-firebase)
-enables the hosting of a web-based experiment on Firebase and the storage of conditions and observations via Firestore.*<br>
+enables the hosting of a web-based experiment on Firebase and the storage of conditions and observations via Firestore.*
 {% endif -%}
-{% if cookiecutter.autora_contribution_type == "synthetic_data" -%}
+{% elif cookiecutter.autora_contribution_type == "synthetic_data" -%}
 ### Synthetic Data 
 A ground-truth model that implements a hypothesized relationship between experimental conditions
 $X$ and observations $Y$. Synthetic models may act as objects of study for which the underlying mechanisms are known, 
 and be used for benchmarking theorists and experimentalists in AutoRA in terms of
 their ability to recover the underlying model from synthetic data, e.g., by acting as "synthetic participants".
-*Example: The basic [Synthetic Data Package](https://github.com/AutoResearch/autora-synthetic-data) implements simple 
-models of economic choice and psychophysics.*
+*Example: The basic [Synthetic Data Package](https://github.com/AutoResearch/autora-synthetic-data) implements simple models of economic choice and psychophysics.*
 {% endif -%}
+
 ### Step 1: Implement Your Code
 
-You may now add a folder in the respective feature category. For instance, if you would like to implement
-and experimentalist sampler, then you may rename the subfolder ``example_sampler`` in 
-``src/autora/experimentalist/sampler/`` and add your implementation of the sampler in the ``__init__.py`` file. You may 
+You may now add a your code to `src/autora/{{ cookiecutter.__full_path }}/__init__.py` file. You may 
 also add additional files in this folder. Just make sure to import the core function or class of your feature
-in the ``__init__.py''' if it is implemented elswhere. 
-
-*Note: You can create folders for new categories if none of the existing feature categories seems fitting.*
+in the `__init__.py` if it is implemented elswhere. 
 
 ### Step 2 (Optional): Add Tests
 
-It is highly encouraged to add unit tests to ensure your code is working as intended. These can be [doctests](https://docs.python.org/3/library/doctest.html) or as test cases in `tests/test_your_contribution_name.py`.
-For example, if you are implementing an experiment sampler, you may rename and modify the 
-``tests/test_experimentalist_sampler_example.py``.
+It is highly encouraged to add unit tests to ensure your code is working as intended. These can be [doctests](https://docs.python.org/3/library/doctest.html) or as test cases in `tests/test_{{ cookiecutter.__python_name }}.py`.
 
 *Note: Tests are required if you wish that your feature becomes part of the main 
 [autora](https://github.com/AutoResearch/autora) package. However, regardless of whether you choose to implement tests, 
@@ -125,6 +132,7 @@ To begin publishing your package, update the metadata under `project` in the pyp
 {% if cookiecutter.use_dynamic_versioning == "no" -%}
 - version
 {% endif -%}
+
 
 Also, update the URL for the repository under `project.urls`.
 
