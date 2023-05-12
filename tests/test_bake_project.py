@@ -82,6 +82,10 @@ def test_bake_with_defaults(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test"}) as result:
         assert check_construct(result)
 
+        # Check naming of directory
+        assert 'autora-theorist-test' == os.path.basename(result.project)
+
+        # All top level files/directories are correct
         found_toplevel_files = [f.basename for f in result.project.listdir()]
         assert 'mkdocs.yml' in found_toplevel_files
         assert '.pre-commit-config.yaml' in found_toplevel_files
