@@ -68,11 +68,19 @@ def project_info(result):
     return project_path, project_slug, project_dir
 
 
+def check_construct(result):
+    checks = [result.project.isdir(),
+              result.exit_code == 0,
+              result.exception is None]
+    if all(checks):
+        return True
+    else:
+        return False
+
+
 def test_bake_with_defaults(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test"}) as result:
-        assert result.project.isdir()
-        assert result.exit_code == 0
-        assert result.exception is None
+        assert check_construct(result)
 
         found_toplevel_files = [f.basename for f in result.project.listdir()]
         assert 'mkdocs.yml' in found_toplevel_files
