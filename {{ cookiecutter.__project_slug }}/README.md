@@ -5,7 +5,7 @@
 ### Create GitHub Repository
 
 You should create a GitHub repository from the root folder of this project:
-- Create a new repository on GitHub with (You probably want to name the repository {{ cookiecutter.__project_slug }})
+- Create a new repository on GitHub (a sensible name for the repository would be {{ cookiecutter.__project_slug }})
 - Follow the guide under `…or push an existing repository from the command line
 ` 
 
