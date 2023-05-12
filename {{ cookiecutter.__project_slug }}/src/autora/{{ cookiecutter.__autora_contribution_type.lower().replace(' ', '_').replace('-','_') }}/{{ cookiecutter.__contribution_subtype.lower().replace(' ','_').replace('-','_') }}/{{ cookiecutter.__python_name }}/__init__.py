@@ -165,7 +165,8 @@ def get_observations(args):
     return observations
 {% elif cookiecutter.__contribution_subtype == "recruitment_manager" -%}
 """
-Example recruitment manager:
+Example Recruitment Manager
+
     These are example functions that could be included 
     (but are not necessarily included)
 """
