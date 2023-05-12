@@ -107,6 +107,8 @@ def test_dynamic_numbering(cookies):
             content = file.read()
         assert 'dynamic = ["version"]' in content
         assert 'version = "0.1.0"' not in content
+        assert 'requires = ["setuptools", "setuptools_scm"]' in content
+        assert '[tool.setuptools_scm]' in content
 
     # Test use_dynamic_versioning = no
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
@@ -116,6 +118,8 @@ def test_dynamic_numbering(cookies):
             content = file.read()
         assert 'dynamic = ["version"]' not in content
         assert 'version = "0.1.0"' in content
+        assert 'requires = ["setuptools", "setuptools_scm"]' not in content
+        assert '[tool.setuptools_scm]' not in content
 
 
 def test_github_actions_removal(cookies):
