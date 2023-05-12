@@ -70,6 +70,16 @@ def check_construct(result):
         return False
 
 
+def tree_list(root):
+    l_tree = []
+    for root, dirs, files in os.walk(root):
+        for d in dirs:
+            l_tree.append(os.path.join(root, d))
+        for f in files:
+            l_tree.append(os.path.join(root, f))
+    return l_tree
+
+
 def test_bake_with_defaults(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test"}) as result:
         assert check_construct(result)
