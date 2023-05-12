@@ -55,7 +55,7 @@ def example_sampler(
 
     *Optional*
     Examples:
-        These examples add documentations and also work as tests
+        These examples add documentation and also work as tests
         >>> example_sampler([1, 2, 3, 4])
         1
         >>> example_sampler(range(3, 10))
