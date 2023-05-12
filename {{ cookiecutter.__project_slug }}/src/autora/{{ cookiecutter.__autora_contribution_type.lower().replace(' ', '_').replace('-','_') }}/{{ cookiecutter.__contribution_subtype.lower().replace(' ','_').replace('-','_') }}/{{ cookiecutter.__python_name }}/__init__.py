@@ -133,7 +133,8 @@ def example_runner(conditions):
     return observations
 {% elif cookiecutter.__contribution_subtype == "experimentation_manager" -%}
 """
-Example experimentation manager:
+Example Experimentation Manager
+
     These are example functions that could be included 
     (but are not necessarily included)
 """
