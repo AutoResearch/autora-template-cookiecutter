@@ -84,7 +84,7 @@ def example_pool(argument: float) -> float:
 
     *Optional*
     Examples:
-        These examples add documentations and also work as tests
+        These examples add documentation and also work as tests
         >>> example_pool(1.)
         1.0
     """
