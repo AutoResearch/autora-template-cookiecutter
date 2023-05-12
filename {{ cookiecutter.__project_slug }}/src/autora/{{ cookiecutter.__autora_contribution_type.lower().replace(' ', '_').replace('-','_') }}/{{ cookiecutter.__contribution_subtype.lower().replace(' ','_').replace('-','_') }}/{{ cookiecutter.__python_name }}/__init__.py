@@ -216,7 +216,8 @@ def check_recruitment_status(args):
 {% endif -%}
 {% elif cookiecutter.__autora_contribution_type == "synthetic_data" -%}
 """ 
-Example synthetic data
+Example Synthetic Data
+
 """
 {% else -%}
 """
