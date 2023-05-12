@@ -46,6 +46,7 @@ def run_inside_dir(command, dirpath):
     with inside_dir(dirpath):
         return subprocess.check_call(shlex.split(command))
 
+
 def check_output_inside_dir(command, dirpath):
     "Run a command from inside a given directory, returning the command output"
     with inside_dir(dirpath):
@@ -115,7 +116,6 @@ def test_dynamic_numbering(cookies):
     # Test use_dynamic_versioning = no
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
                                                   "use_dynamic_versioning": "no"}) as result:
-
         with open(result.project / 'pyproject.toml') as file:
             content = file.read()
         assert 'dynamic = ["version"]' not in content
