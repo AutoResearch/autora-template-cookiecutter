@@ -91,7 +91,7 @@ in the `__init__.py` if it is implemented elswhere.
 
 ### Step 2 (Optional): Add Tests
 
-It is highly encouraged to add unit tests to ensure your code is working as intended. These can be [doctests](https://docs.python.org/3/library/doctest.html) or as test cases in `tests/test_{{ cookiecutter.__python_name }}.py`.
+It is highly encouraged to add unit tests to ensure your code is working as intended. These can be [doctests](https://docs.python.org/3/library/doctest.html) or test cases in `tests/test_{{ cookiecutter.__python_name }}.py`.
 
 *Note: Tests are required if you wish that your feature becomes part of the main 
 [autora](https://github.com/AutoResearch/autora) package. However, regardless of whether you choose to implement tests, 
