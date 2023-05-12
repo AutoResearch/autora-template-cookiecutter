@@ -136,3 +136,23 @@ def test_precommit_hooks_file_removal(cookies):
         assert check_construct(result)
         found_toplevel_files = [f.basename for f in result.project.listdir()]
         assert '.pre-commit-config.yaml' not in found_toplevel_files
+
+
+def test_pyproject_toml_population(cookies):
+    with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
+                                                  "full_name": "John Doe",
+                                                  "email": "jdoe@domain.com",
+                                                  "project_short_description": "This is a test.",
+                                                  "repository": "www.repository.com",
+                                                  "license": 'BSD license'
+                                                  }) as result:
+        assert check_construct(result)
+        with open(result.project / 'pyproject.toml') as file:
+            content = file.read()
+
+        assert 'name = "test"' in content
+        assert 'description = "This is a test."' in content
+        assert 'name = "John Doe"' in content
+        assert 'email = "jdoe@domain.com"' in content
+        assert 'repository = "www.repository.com"' in content
+        assert 'license = { text = "BSD license" }'
