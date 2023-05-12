@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import os
 import shutil
-import sys
-from typing import Dict
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
