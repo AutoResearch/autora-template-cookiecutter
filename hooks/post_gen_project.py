@@ -18,6 +18,7 @@ def move_files_to_parent_folder(folder_path):
     if not os.listdir(folder_path):
         os.rmdir(folder_path)
 
+
 if __name__ == '__main__':
     # Move file to upper level if no contribution subtype
     if 'not_applicable' == '{{ cookiecutter.__contribution_subtype }}':
