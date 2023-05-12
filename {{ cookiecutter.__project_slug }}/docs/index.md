@@ -1,4 +1,4 @@
-# Name-Of-Your-Contribution (don't include AutoRA here)
+# {{ cookiecutter.contribution_name }}
 
 Explain what your contribution is doing here
 
