@@ -21,8 +21,16 @@ def move_files_to_parent_folder(folder_path):
         os.rmdir(folder_path)
 
 if __name__ == '__main__':
-    if 'not-applicable' == '{{ cookiecutter.__contribution_subtype }}':
-        print('something')
-        move_files_to_parent_folder('src/autora/{{ cookiecutter.__autora_contribution_type }}/{{ cookiecutter.__contribution_subtype }}')
+    # Move file to upper level if no contribution subtype
+    if 'not_applicable' == '{{ cookiecutter.__contribution_subtype }}':
+        shutil.move(
+            'src/autora/{{ cookiecutter.__autora_contribution_type }}/not_applicable/{{ cookiecutter.__python_name }}',
+            'src/autora/{{ cookiecutter.__autora_contribution_type }}/{{ cookiecutter.__python_name }}',)
+        os.rmdir('src/autora/{{ cookiecutter.__autora_contribution_type }}/not_applicable')
+    # Remove .pre-commit-config.yaml file if no github-actions
+    if 'no' == '{{ cookiecutter.use_pre_commit_hooks }}':
+        os.remove('.pre-commit-config.yaml')
+
+
 
 

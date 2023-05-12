@@ -55,7 +55,7 @@ def example_sampler(
 
     *Optional*
     Examples:
-        These examples add documentations and also work as tests
+        These examples add documentation and also work as tests
         >>> example_sampler([1, 2, 3, 4])
         1
         >>> example_sampler(range(3, 10))
@@ -70,7 +70,7 @@ def example_sampler(
     return new_conditions[:num_samples]
 {% elif cookiecutter.__contribution_subtype == "pooler" -%}
 """
-Example Experimentalist Sampler
+Example Experimentalist Pooler
 """
 
 
@@ -84,7 +84,7 @@ def example_pool(argument: float) -> float:
 
     *Optional*
     Examples:
-        These examples add documentations and also work as tests
+        These examples add documentation and also work as tests
         >>> example_pool(1.)
         1.0
     """
@@ -104,16 +104,16 @@ def example(argument: float) -> float:
         argument: description of the argument
     Returns: description of the return value
 
-    *Optinal*
+    *Optional*
     Examples: 
-        These examples add documentation and alsow work as tests
+        These examples add documentation and also work as tests
         >>> example(1.)
         1.0
     """
     return argument
 {% endif -%}
 {% elif cookiecutter.__autora_contribution_type == "experiment_runner" -%}
-{% if cookiecutter.__contribution_subtype != "experiment_runner" -%}
+{% if cookiecutter.__contribution_subtype == "experiment_runner" -%}
 """
 Example Experiment Runner
 """
@@ -131,9 +131,10 @@ def example_runner(conditions):
     observations = conditions
 
     return observations
-{% elif cookiecutter.__contribution_subtype != "experimentation_manager" -%}
+{% elif cookiecutter.__contribution_subtype == "experimentation_manager" -%}
 """
-Example experimentation manager:
+Example Experimentation Manager
+
     These are example functions that could be included 
     (but are not necessarily included)
 """
@@ -162,9 +163,10 @@ def get_observations(args):
     """
     observations = None
     return observations
-{% elif cookiecutter.__contribution_subtype != "recruitment_manager" -%}
+{% elif cookiecutter.__contribution_subtype == "recruitment_manager" -%}
 """
-Example recruitment manager:
+Example Recruitment Manager
+
     These are example functions that could be included 
     (but are not necessarily included)
 """
@@ -214,7 +216,8 @@ def check_recruitment_status(args):
 {% endif -%}
 {% elif cookiecutter.__autora_contribution_type == "synthetic_data" -%}
 """ 
-Example synthetic data
+Example Synthetic Data
+
 """
 {% else -%}
 """
