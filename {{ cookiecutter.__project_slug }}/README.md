@@ -28,7 +28,7 @@ Activate it:
 source venv/bin/activate
 ```
 
-### Install dev Dependencies
+### Install Dev Dependencies
 
 Use `pip install` to install the current project (`"."`) in editable mode (`-e`) with dev-dependencies (`[dev]`):
 ```shell
