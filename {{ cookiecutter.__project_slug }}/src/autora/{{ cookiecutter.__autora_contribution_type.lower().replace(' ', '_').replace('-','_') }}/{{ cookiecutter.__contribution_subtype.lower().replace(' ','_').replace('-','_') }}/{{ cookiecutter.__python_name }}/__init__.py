@@ -70,7 +70,7 @@ def example_sampler(
     return new_conditions[:num_samples]
 {% elif cookiecutter.__contribution_subtype == "pooler" -%}
 """
-Example Experimentalist Sampler
+Example Experimentalist Pooler
 """
 
 
