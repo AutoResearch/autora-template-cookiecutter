@@ -5,16 +5,8 @@ https://github.com/audreyfeldroy/cookiecutter-pypackage
 from contextlib import contextmanager
 import shlex
 import os
-import sys
 import subprocess
-import yaml
-import datetime
-import pytest
 from cookiecutter.utils import rmtree
-
-from click.testing import CliRunner
-
-import importlib
 
 
 @contextmanager
