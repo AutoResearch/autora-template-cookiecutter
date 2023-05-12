@@ -1,6 +1,7 @@
 {
   "full_name": "<Your full name>",
   "email": "<Your email>",
+  "contribution_name": "<Contribution name>",
   "autora_contribution_type": ["theorist", "experimentalist", "experiment_runner", "synthetic_data", "custom"],
   "custom_autora_contribution_type": "{% if cookiecutter.autora_contribution_type == 'custom' -%}<custom_autora_contribution_type>{% else -%}N/A - Press Enter to Skip{% endif -%}",
   "__autora_contribution_type": "{% if cookiecutter.autora_contribution_type == 'custom' -%}{{ cookiecutter.custom_autora_contribution_type }}{% else -%}{{ cookiecutter.autora_contribution_type }}{% endif -%}",
@@ -15,7 +16,6 @@
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}", 
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to Skip{% endif -%}"],
   "__contribution_subtype": "{% if cookiecutter.__autora_contribution_type == 'experimentalist' -%}{{ cookiecutter.__experimentalist_type }}{% elif cookiecutter.__autora_contribution_type == 'experiment_runner' and cookiecutter.experiement_runner_type != 'experiment_runner' -%}{{ cookiecutter.experiement_runner_type }}{% else -%}not_applicable{% endif -%}",
-  "contribution_name": "<Contribution name>",
   "project_short_description": "<Short description>",
   "repository": "<Repository URL>",
   "use_dynamic_versioning": ["yes", "no"],
