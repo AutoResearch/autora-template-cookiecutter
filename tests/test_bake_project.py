@@ -1,3 +1,7 @@
+"""
+Functions and structure derived from test found in
+https://github.com/audreyfeldroy/cookiecutter-pypackage
+"""
 from contextlib import contextmanager
 import shlex
 import os
