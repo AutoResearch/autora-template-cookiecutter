@@ -158,3 +158,145 @@ def test_pyproject_toml_population(cookies):
         assert 'email = "jdoe@domain.com"' in content
         assert 'repository = "www.repository.com"' in content
         assert 'license = { text = "BSD license" }'
+
+
+def test_theorist(cookies):
+    with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test-theorist",
+                                                  "autora_contribution_type": "theorist",
+                                                  }) as result:
+        assert check_construct(result)
+
+        # Check naming of directory
+        assert 'autora-theorist-test-theorist' == os.path.basename(result.project)
+
+        # Check source code tree structure
+        l_tree = tree_list(result.project / 'src')
+        l_tree = [s.split(os.path.basename(result.project))[1] for s in l_tree]
+        assert l_tree == ['/src/autora',
+                          '/src/autora/theorist',
+                          '/src/autora/theorist/test_theorist',
+                          '/src/autora/theorist/test_theorist/__init__.py']
+
+
+def test_experimentalist(cookies):
+    subtypes_raw = [
+        "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}sampler{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}pooler{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}custom{% else -%}N/A - Press Enter to Skip{% endif -%}"]
+    subtypes = ['sampler', 'pooler', 'custom']
+
+    d_subtypes = {}
+    for i, (subtype, raw) in enumerate(zip(subtypes, subtypes_raw)):
+        d_inputs = {"contribution_name": "test-experimentalist",
+                    "autora_contribution_type": "experimentalist",
+                    "__experimentalist_type": raw
+                    }
+        if subtype == 'custom':
+            d_inputs['custom_experimentalist_type'] = 'new-type'
+
+        with bake_in_temp_dir(cookies, extra_context=d_inputs) as result:
+            assert check_construct(result)
+
+            # Check source code tree structure
+            basename = os.path.basename(result.project)
+            l_tree = tree_list(result.project / 'src')
+            l_tree = [s.split(basename)[1] for s in l_tree]
+
+            # Add to dict
+            d_subtypes[subtype] = {'basename': basename, 'tree': l_tree}
+
+    # Check directory names
+    assert d_subtypes['sampler'][
+               'basename'] == 'autora-experimentalist-sampler-test-experimentalist'
+    assert d_subtypes['pooler'][
+               'basename'] == 'autora-experimentalist-pooler-test-experimentalist'
+    assert d_subtypes['custom'][
+               'basename'] == 'autora-experimentalist-new-type-test-experimentalist'
+
+    # Check directory trees
+    assert d_subtypes['sampler']['tree'] == ['/src/autora', '/src/autora/experimentalist',
+                                             '/src/autora/experimentalist/sampler',
+                                             '/src/autora/experimentalist/sampler/test_experimentalist',
+                                             '/src/autora/experimentalist/sampler/test_experimentalist/__init__.py']
+
+    assert d_subtypes['pooler']['tree'] == ['/src/autora', '/src/autora/experimentalist',
+                                            '/src/autora/experimentalist/pooler',
+                                            '/src/autora/experimentalist/pooler/test_experimentalist',
+                                            '/src/autora/experimentalist/pooler/test_experimentalist/__init__.py']
+
+    assert d_subtypes['custom']['tree'] == ['/src/autora', '/src/autora/experimentalist',
+                                            '/src/autora/experimentalist/new_type',
+                                            '/src/autora/experimentalist/new_type/test_experimentalist',
+                                            '/src/autora/experimentalist/new_type/test_experimentalist/__init__.py']
+
+
+def test_runner(cookies):
+    subtypes_raw = [
+        "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to Skip{% endif -%}"]
+    subtypes = ['experiment_runner', 'experimentation_manager', 'recruitment_manager']
+
+    d_subtypes = {}
+    for i, (subtype, raw) in enumerate(zip(subtypes, subtypes_raw)):
+        d_inputs = {"contribution_name": "test_runner",
+                    "autora_contribution_type": "experiment_runner",
+                    "experiement_runner_type": raw
+                    }
+
+        with bake_in_temp_dir(cookies, extra_context=d_inputs) as result:
+            assert check_construct(result)
+
+            # Check source code tree structure
+            basename = os.path.basename(result.project)
+            l_tree = tree_list(result.project / 'src')
+            l_tree = [s.split(basename)[1] for s in l_tree]
+
+            # Add to dict
+            d_subtypes[subtype] = {'basename': basename, 'tree': l_tree}
+
+    # Check directory names
+    assert d_subtypes['experiment_runner'][
+               'basename'] == 'autora-experiment_runner-test_runner'
+    assert d_subtypes['experimentation_manager'][
+               'basename'] == 'autora-experiment_runner-experimentation_manager-test_runner'
+    assert d_subtypes['recruitment_manager'][
+               'basename'] == 'autora-experiment_runner-recruitment_manager-test_runner'
+
+    # Check directory trees
+    assert d_subtypes['experiment_runner']['tree'] == ['/src/autora',
+                                                       '/src/autora/experiment_runner',
+                                                       '/src/autora/experiment_runner/test_runner',
+                                                       '/src/autora/experiment_runner/test_runner/__init__.py']
+
+    assert d_subtypes['experimentation_manager']['tree'] == ['/src/autora',
+                                                             '/src/autora/experiment_runner',
+                                                             '/src/autora/experiment_runner/experimentation_manager',
+                                                             '/src/autora/experiment_runner/experimentation_manager/test_runner',
+                                                             '/src/autora/experiment_runner/experimentation_manager/test_runner/__init__.py']
+
+    assert d_subtypes['recruitment_manager']['tree'] == ['/src/autora',
+                                                         '/src/autora/experiment_runner',
+                                                         '/src/autora/experiment_runner/recruitment_manager',
+                                                         '/src/autora/experiment_runner/recruitment_manager/test_runner',
+                                                         '/src/autora/experiment_runner/recruitment_manager/test_runner/__init__.py']
+
+
+def test_custom(cookies):
+    d_inputs = {"contribution_name": "test_custom",
+                "autora_contribution_type": "custom",
+                "custom_autora_contribution_type": "new_type"
+                }
+    with bake_in_temp_dir(cookies, extra_context=d_inputs) as result:
+        assert check_construct(result)
+
+        # Check source code tree structure
+        basename = os.path.basename(result.project)
+        l_tree = tree_list(result.project / 'src')
+        l_tree = [s.split(basename)[1] for s in l_tree]
+
+        assert basename == 'autora-new_type-test_custom'
+        assert l_tree == ['/src/autora',
+                          '/src/autora/new_type',
+                          '/src/autora/new_type/test_custom',
+                          '/src/autora/new_type/test_custom/__init__.py']
