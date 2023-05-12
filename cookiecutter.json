@@ -12,7 +12,7 @@
   "__experimentalist_type": "{% if cookiecutter.autora_contribution_type == 'experimentalist' and cookiecutter.experimentalist_type == 'custom' -%}{{ cookiecutter.custom_experimentalist_type }}{% else -%}{{ cookiecutter.experimentalist_type }}{% endif -%}",
   "experiement_runner_type": [
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner{% else -%}N/A - Press Enter to Skip{% endif -%}", 
-    "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}participation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}", 
+    "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}", 
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to Skip{% endif -%}"],
   "__contribution_subtype": "{% if cookiecutter.__autora_contribution_type == 'experimentalist' -%}{{ cookiecutter.__experimentalist_type }}{% elif cookiecutter.__autora_contribution_type == 'experiment_runner' and cookiecutter.experiement_runner_type != 'experiment_runner' -%}{{ cookiecutter.experiement_runner_type }}{% else -%}not_applicable{% endif -%}",
   "contribution_name": "<contribution name>",
