@@ -104,7 +104,7 @@ def example(argument: float) -> float:
         argument: description of the argument
     Returns: description of the return value
 
-    *Optinal*
+    *Optional*
     Examples: 
         These examples add documentation and alsow work as tests
         >>> example(1.)
