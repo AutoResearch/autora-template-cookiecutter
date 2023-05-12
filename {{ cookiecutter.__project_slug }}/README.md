@@ -85,7 +85,7 @@ their ability to recover the underlying model from synthetic data, e.g., by acti
 
 ### Step 1: Implement Your Code
 
-You may now add a your code to `src/autora/{{ cookiecutter.__full_path }}/__init__.py` file. You may 
+You may now add your code to `src/autora/{{ cookiecutter.__full_path }}/__init__.py` file. You may 
 also add additional files in this folder. Just make sure to import the core function or class of your feature
 in the `__init__.py` if it is implemented elswhere. 
 
