@@ -106,7 +106,7 @@ def example(argument: float) -> float:
 
     *Optional*
     Examples: 
-        These examples add documentation and alsow work as tests
+        These examples add documentation and also work as tests
         >>> example(1.)
         1.0
     """
