@@ -25,9 +25,13 @@ if __name__ == '__main__':
             'src/autora/{{ cookiecutter.__autora_contribution_type }}/not_applicable/{{ cookiecutter.__python_name }}',
             'src/autora/{{ cookiecutter.__autora_contribution_type }}/{{ cookiecutter.__python_name }}',)
         os.rmdir('src/autora/{{ cookiecutter.__autora_contribution_type }}/not_applicable')
-    # Remove .pre-commit-config.yaml file if no github-actions
+    # Remove .pre-commit-config.yaml file if not using pre-commit hooks
     if 'no' == '{{ cookiecutter.use_pre_commit_hooks }}':
         os.remove('.pre-commit-config.yaml')
+    # Remove .github directory if not using github actions
+    if 'no' == '{{ cookiecutter.use_github_actions }}':
+        shutil.rmtree('.github')
+
 
 
 
