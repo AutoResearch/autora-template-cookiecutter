@@ -113,7 +113,7 @@ def example(argument: float) -> float:
     return argument
 {% endif -%}
 {% elif cookiecutter.__autora_contribution_type == "experiment_runner" -%}
-{% if cookiecutter.__contribution_subtype != "experiment_runner" -%}
+{% if cookiecutter.__contribution_subtype == "experiment_runner" -%}
 """
 Example Experiment Runner
 """
