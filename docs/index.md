@@ -4,7 +4,7 @@
 
 ## Usage
 
-This is a command line tool to create a template for a AutoRa package.
+This is a command line tool for creating the structure of a new AutoRA subpackage.
 
 First install the cookiecutter package:
 ```shell
