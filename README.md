@@ -1,4 +1,4 @@
-# AutoRa Cookiecutter Template
+# AutoRA Cookiecutter Template
 
 This is a command line tool to create a template for a AutoRa package. 
 [Here](https://autoresearch.github.io/autora/), you can find the documentation for AutoRa.
