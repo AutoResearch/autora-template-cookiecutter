@@ -1,4 +1,4 @@
-# AutoRa Cookiecutter 
+# AutoRA Cookiecutter 
 
 # AutoRa Cookiecutter Template
 
