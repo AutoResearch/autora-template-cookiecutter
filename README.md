@@ -1,7 +1,7 @@
 # AutoRA Cookiecutter Template
 
 This is a command line tool for creating the structure of a new AutoRA subpackage. 
-[Here](https://autoresearch.github.io/autora/), you can find the documentation for AutoRa.
+[Here](https://autoresearch.github.io/autora/) you can find the documentation for AutoRA.
 
 ## Usage
 
