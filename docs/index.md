@@ -1,6 +1,4 @@
-# AutoRA Cookiecutter 
-
-# AutoRA Cookiecutter Template
+# Cookiecutter Contribution Template
 
 ## Usage
 
