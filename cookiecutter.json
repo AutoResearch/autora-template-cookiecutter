@@ -11,11 +11,11 @@
     "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}custom{% else -%}N/A - Press Enter to Skip{% endif -%}"],
   "custom_experimentalist_type": "{% if cookiecutter.experimentalist_type == 'custom' -%}<custom_experimentalist_type>{% else -%}N/A - Press Enter to Skip{% endif -%}",
   "__experimentalist_type": "{% if cookiecutter.autora_contribution_type == 'experimentalist' and cookiecutter.experimentalist_type == 'custom' -%}{{ cookiecutter.custom_experimentalist_type }}{% else -%}{{ cookiecutter.experimentalist_type }}{% endif -%}",
-  "experiement_runner_type": [
+  "experiment_runner_type": [
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner{% else -%}N/A - Press Enter to Skip{% endif -%}", 
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}", 
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to Skip{% endif -%}"],
-  "__contribution_subtype": "{% if cookiecutter.__autora_contribution_type == 'experimentalist' -%}{{ cookiecutter.__experimentalist_type }}{% elif cookiecutter.__autora_contribution_type == 'experiment_runner' and cookiecutter.experiement_runner_type != 'experiment_runner' -%}{{ cookiecutter.experiement_runner_type }}{% else -%}not_applicable{% endif -%}",
+  "__contribution_subtype": "{% if cookiecutter.__autora_contribution_type == 'experimentalist' -%}{{ cookiecutter.__experimentalist_type }}{% elif cookiecutter.__autora_contribution_type == 'experiment_runner' and cookiecutter.experiment_runner_type != 'experiment_runner' -%}{{ cookiecutter.experiment_runner_type }}{% else -%}not_applicable{% endif -%}",
   "project_short_description": "<Short description>",
   "repository": "<Repository URL>",
   "use_dynamic_versioning": ["yes", "no"],

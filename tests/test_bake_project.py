@@ -262,7 +262,7 @@ def test_runner(cookies):
     for i, (subtype, raw) in enumerate(zip(subtypes, subtypes_raw)):
         d_inputs = {"contribution_name": "test_runner",
                     "autora_contribution_type": "experiment_runner",
-                    "experiement_runner_type": raw
+                    "experiment_runner_type": raw
                     }
 
         with bake_in_temp_dir(cookies, extra_context=d_inputs) as result:
