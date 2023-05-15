@@ -38,6 +38,13 @@ def bake_in_temp_dir(cookies, *args, **kwargs):
         rmtree(str(result.project))
 
 
+def bake_and_return_readme(cookies, inputs):
+    with bake_in_temp_dir(cookies, extra_context=inputs) as result:
+        with open(result.project / 'README.md') as file:
+            content = file.read()
+            return content
+
+
 def run_inside_dir(command, dirpath):
     """
     Run a command from inside a given directory, returning the exit status
@@ -324,3 +331,115 @@ def test_custom(cookies):
                                            '/src/autora/new_type',
                                            '/src/autora/new_type/test_custom',
                                            '/src/autora/new_type/test_custom/__init__.py'])
+
+
+def test_readme_populate_defaults(cookies):
+    d_inputs = {"contribution_name": "test_readme"}
+    content = bake_and_return_readme(cookies, d_inputs)
+
+    slug_text = f"(a sensible name for the repository would be " \
+                f"autora-theorist-{d_inputs['contribution_name']})"
+    assert slug_text in content
+
+    full_path_text = "add your code to `src/autora/theorist/test_readme/__init__.py`"
+    assert full_path_text in content
+
+    python_name_text = 'test cases in `tests/test_test_readme.py`.'
+    assert python_name_text in content
+
+
+def test_readme_population_by_contribution_type(cookies):
+    l_contribution_types = ["theorist", "experimentalist", "experiment_runner", "synthetic_data"]
+    d_contribution_subtypes = {'experimentalist': ['pooler', 'sampler'],
+                               'experiment_runner': ['experiment_runner', 'experimentation_manager',
+                                                     'recruitment_manager']}
+    d_subtypes_raw = {
+        "sampler": "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}sampler{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "pooler": "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}pooler{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "experiment_runner": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "experimentation_manager": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "recruitment_manager": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to Skip{% endif -%}"
+    }
+
+    # Create all permutations of readme files
+    d_readme = {}
+    # Loop by contribution type
+    for contriubtion_type in l_contribution_types:
+        d_inputs = {"contribution_name": "test_readme",
+                    "autora_contribution_type": contriubtion_type}
+        # If no subtypes
+        if contriubtion_type not in d_contribution_subtypes:
+            # Generate project and return readme contents
+            d_readme[contriubtion_type] = bake_and_return_readme(cookies, d_inputs)
+
+        # If subtypes
+        elif contriubtion_type in d_contribution_subtypes:
+            for subtype in d_contribution_subtypes[contriubtion_type]:
+                if contriubtion_type == 'experimentalist':
+                    d_inputs["experimentalist_type"] = d_subtypes_raw[subtype]
+                elif contriubtion_type == 'experiment_runner':
+                    d_inputs["experiment_runner_type"] = d_subtypes_raw[subtype]
+                # Generate project and return readme contents
+                d_readme[f"{contriubtion_type}-{subtype}"] = \
+                    bake_and_return_readme(cookies, d_inputs)
+
+    # Assert presence and absence of appropriate headers
+    ## Theorist
+    theorist_absent = ["### Experimentalist", "### Experiment Runners", "### Synthetic Data "]
+    assert '### Theorist' in d_readme['theorist'] and \
+           all([s not in d_readme['theorist'] for s in theorist_absent])
+
+    ## Experimentalist
+    experimentalist_absent = ["### Theorist", "### Experiment Runners", "### Synthetic Data "]
+    assert '### Experimentalist' in d_readme['experimentalist-sampler'] and \
+           all([s not in d_readme['experimentalist-sampler'] for s in experimentalist_absent])
+    assert '*Sampler*' in d_readme['experimentalist-sampler']
+
+    assert '### Experimentalist' in d_readme['experimentalist-pooler'] and \
+           all([s not in d_readme['experimentalist-pooler'] for s in experimentalist_absent])
+    assert '*Pooler*' in d_readme['experimentalist-pooler']
+
+    ## Experiment Runner
+    ### Base Runner
+    er_absent = ["### Theorist", "### Experimentalist", "### Synthetic Data "]
+    assert '### Experiment Runners' in d_readme['experiment_runner-experiment_runner'] and \
+           all([s not in d_readme['experiment_runner-experiment_runner'] for s in er_absent])
+    assert '*Recruitment Manager*' not in d_readme['experiment_runner-experiment_runner']
+    assert '*Experimentation Manager*' not in d_readme['experiment_runner-experiment_runner']
+    ### Experimentation manager
+    assert '*Experimentation Manager*' in d_readme['experiment_runner-experimentation_manager']
+    assert '*Recruitment Manager*' not in d_readme['experiment_runner-experimentation_manager']
+    ### Recruitment manager
+    assert '*Recruitment Manager*' in d_readme['experiment_runner-recruitment_manager']
+    assert '*Experimentation Manager*' not in d_readme['experiment_runner-recruitment_manager']
+
+    ## Synthetic Data
+    sd_absent = ["### Theorist", "### Experimentalist", "### Experiment Runners"]
+    assert '### Synthetic Data' in d_readme['synthetic_data'] and \
+           all([s not in d_readme['synthetic_data'] for s in sd_absent])
+
+
+def test_readme_population_by_options(cookies):
+    content_gh = bake_and_return_readme(cookies,
+                                        {"contribution_name": "test_readme",
+                                         "use_github_actions": "yes"})
+    assert '#### Step 5.2 Publish via GitHub Actions' in content_gh
+    assert '#### Step 5.2: Publish via Twine' not in content_gh
+
+    content_twine = bake_and_return_readme(cookies,
+                                           {"contribution_name": "test_readme",
+                                            "use_dynamic_versioning": "yes",
+                                            "use_github_actions": "no",
+                                            }
+                                           )
+    assert '#### Step 5.2: Publish via Twine' in content_twine
+    assert '#### Dynamic versioning' in content_twine
+
+    content_twine_no_dv = bake_and_return_readme(cookies,
+                                                 {"contribution_name": "test_readme",
+                                                  "use_dynamic_versioning": "no",
+                                                  "use_github_actions": "no",
+                                                  }
+                                                 )
+    assert '#### Dynamic versioning' not in content_twine_no_dv
+    assert '- version' in content_twine_no_dv
