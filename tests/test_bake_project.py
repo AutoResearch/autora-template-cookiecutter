@@ -7,6 +7,7 @@ import shlex
 import os
 import subprocess
 from cookiecutter.utils import rmtree
+from pathlib import Path
 
 
 @contextmanager
@@ -82,7 +83,7 @@ def tree_list(root):
 
 
 def convert_os_paths(path_list):
-    return_list = [os.path.join(s) for s in path_list]
+    return_list = [Path(s) for s in path_list]
     return return_list
 
 
