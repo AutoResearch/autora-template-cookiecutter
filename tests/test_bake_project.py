@@ -166,6 +166,17 @@ def test_pyproject_toml_population(cookies):
         assert 'license = { text = "BSD license" }'
 
 
+def test_mkdocs_population(cookies):
+    with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
+                                                  "repository": "www.repository.com",
+                                                  }) as result:
+        assert check_construct(result)
+        with open(result.project / 'mkdocs.yml') as file:
+            content = file.read()
+        assert 'site_name: AutoRA test' in content
+        assert "repo_url: 'www.repository.com'" in content
+
+
 def test_theorist(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test-theorist",
                                                   "autora_contribution_type": "theorist",
