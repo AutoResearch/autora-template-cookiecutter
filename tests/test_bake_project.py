@@ -176,8 +176,9 @@ def test_theorist(cookies):
         assert 'autora-theorist-test-theorist' == os.path.basename(result.project)
 
         # Check source code tree structure
+        basename = os.path.basename(result.project)
         l_tree = tree_list(result.project / 'src')
-        l_tree = [s.split(os.path.basename(result.project))[1] for s in l_tree]
+        l_tree = [Path(s.split(basename)[1]) for s in l_tree]
         assert l_tree == convert_os_paths(['/src/autora',
                                            '/src/autora/theorist',
                                            '/src/autora/theorist/test_theorist',
@@ -206,7 +207,7 @@ def test_experimentalist(cookies):
             # Check source code tree structure
             basename = os.path.basename(result.project)
             l_tree = tree_list(result.project / 'src')
-            l_tree = [s.split(basename)[1] for s in l_tree]
+            l_tree = [Path(s.split(basename)[1]) for s in l_tree]
 
             # Add to dict
             d_subtypes[subtype] = {'basename': basename, 'tree': l_tree}
@@ -259,7 +260,7 @@ def test_runner(cookies):
             # Check source code tree structure
             basename = os.path.basename(result.project)
             l_tree = tree_list(result.project / 'src')
-            l_tree = [s.split(basename)[1] for s in l_tree]
+            l_tree = [Path(s.split(basename)[1]) for s in l_tree]
 
             # Add to dict
             d_subtypes[subtype] = {'basename': basename, 'tree': l_tree}
@@ -305,7 +306,7 @@ def test_custom(cookies):
         # Check source code tree structure
         basename = os.path.basename(result.project)
         l_tree = tree_list(result.project / 'src')
-        l_tree = [s.split(basename)[1] for s in l_tree]
+        l_tree = [Path(s.split(basename)[1]) for s in l_tree]
 
         assert basename == 'autora-new_type-test_custom'
         assert l_tree == convert_os_paths(['/src/autora',
