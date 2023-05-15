@@ -23,9 +23,9 @@ if __name__ == '__main__':
     # Move file to upper level if no contribution subtype
     if 'not_applicable' == '{{ cookiecutter.__contribution_subtype }}':
         shutil.move(
-            'src/autora/{{ cookiecutter.__autora_contribution_type }}/not_applicable/{{ cookiecutter.__python_name }}',
-            'src/autora/{{ cookiecutter.__autora_contribution_type }}/{{ cookiecutter.__python_name }}',)
-        os.rmdir('src/autora/{{ cookiecutter.__autora_contribution_type }}/not_applicable')
+            'src/autora/{{ cookiecutter.__contribution_type_modulename }}/not_applicable/{{ cookiecutter.__python_name }}',
+            'src/autora/{{ cookiecutter.__contribution_type_modulename }}/{{ cookiecutter.__python_name }}',)
+        os.rmdir('src/autora/{{ cookiecutter.__contribution_type_modulename }}/not_applicable')
     # Remove .pre-commit-config.yaml file if not using pre-commit hooks
     if 'no' == '{{ cookiecutter.use_pre_commit_hooks }}':
         os.remove('.pre-commit-config.yaml')

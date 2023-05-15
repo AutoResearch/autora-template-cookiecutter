@@ -25,5 +25,7 @@
   "__full_path": "{{ cookiecutter.__autora_contribution_type.lower().replace(' ', '_').replace('-', '_') }}/{% if cookiecutter.__contribution_subtype != 'not_applicable' -%}{{ cookiecutter.__contribution_subtype.lower().replace(' ','_').replace('-','_') }}/{% endif -%}{{ cookiecutter.contribution_name.lower().replace(' ', '_').replace('-','_') }}",
   "__full_name": "{{ cookiecutter.__autora_contribution_type.lower().replace(' ', '-') }}-{% if cookiecutter.__contribution_subtype != 'not_applicable' -%}{{ cookiecutter.__contribution_subtype.lower().replace(' ', '-') }}-{% endif -%}{{ cookiecutter.contribution_name.lower().replace(' ', '-') }}",
   "__project_slug": "autora-{{ cookiecutter.__full_name }}",
-  "__python_name": "{{ cookiecutter.contribution_name.lower().replace(' ', '_').replace('-', '_') }}"
+  "__python_name": "{{ cookiecutter.contribution_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "__contribution_type_modulename": "{{ cookiecutter.__autora_contribution_type.lower().replace(' ', '_').replace('-', '_')  }}",
+  "__contribution_subtype_modulename": "{{ cookiecutter.__contribution_subtype.lower().replace(' ', '_').replace('-', '_')  }}"
 }
