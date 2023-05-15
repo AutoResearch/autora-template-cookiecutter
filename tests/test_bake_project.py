@@ -81,6 +81,11 @@ def tree_list(root):
     return l_tree
 
 
+def convert_os_paths(path_list):
+    return_list = [os.path.join(s) for s in path_list]
+    return return_list
+
+
 def test_bake_with_defaults(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test"}) as result:
         assert check_construct(result)
@@ -172,10 +177,10 @@ def test_theorist(cookies):
         # Check source code tree structure
         l_tree = tree_list(result.project / 'src')
         l_tree = [s.split(os.path.basename(result.project))[1] for s in l_tree]
-        assert l_tree == ['/src/autora',
-                          '/src/autora/theorist',
-                          '/src/autora/theorist/test_theorist',
-                          '/src/autora/theorist/test_theorist/__init__.py']
+        assert l_tree == convert_os_paths(['/src/autora',
+                                           '/src/autora/theorist',
+                                           '/src/autora/theorist/test_theorist',
+                                           '/src/autora/theorist/test_theorist/__init__.py'])
 
 
 def test_experimentalist(cookies):
@@ -214,20 +219,23 @@ def test_experimentalist(cookies):
                'basename'] == 'autora-experimentalist-new-type-test-experimentalist'
 
     # Check directory trees
-    assert d_subtypes['sampler']['tree'] == ['/src/autora', '/src/autora/experimentalist',
-                                             '/src/autora/experimentalist/sampler',
-                                             '/src/autora/experimentalist/sampler/test_experimentalist',
-                                             '/src/autora/experimentalist/sampler/test_experimentalist/__init__.py']
+    assert d_subtypes['sampler']['tree'] == convert_os_paths(
+        ['/src/autora', '/src/autora/experimentalist',
+         '/src/autora/experimentalist/sampler',
+         '/src/autora/experimentalist/sampler/test_experimentalist',
+         '/src/autora/experimentalist/sampler/test_experimentalist/__init__.py'])
 
-    assert d_subtypes['pooler']['tree'] == ['/src/autora', '/src/autora/experimentalist',
-                                            '/src/autora/experimentalist/pooler',
-                                            '/src/autora/experimentalist/pooler/test_experimentalist',
-                                            '/src/autora/experimentalist/pooler/test_experimentalist/__init__.py']
+    assert d_subtypes['pooler']['tree'] == convert_os_paths(
+        ['/src/autora', '/src/autora/experimentalist',
+         '/src/autora/experimentalist/pooler',
+         '/src/autora/experimentalist/pooler/test_experimentalist',
+         '/src/autora/experimentalist/pooler/test_experimentalist/__init__.py'])
 
-    assert d_subtypes['custom']['tree'] == ['/src/autora', '/src/autora/experimentalist',
-                                            '/src/autora/experimentalist/new_type',
-                                            '/src/autora/experimentalist/new_type/test_experimentalist',
-                                            '/src/autora/experimentalist/new_type/test_experimentalist/__init__.py']
+    assert d_subtypes['custom']['tree'] == convert_os_paths(
+        ['/src/autora', '/src/autora/experimentalist',
+         '/src/autora/experimentalist/new_type',
+         '/src/autora/experimentalist/new_type/test_experimentalist',
+         '/src/autora/experimentalist/new_type/test_experimentalist/__init__.py'])
 
 
 def test_runner(cookies):
@@ -264,22 +272,25 @@ def test_runner(cookies):
                'basename'] == 'autora-experiment_runner-recruitment_manager-test_runner'
 
     # Check directory trees
-    assert d_subtypes['experiment_runner']['tree'] == ['/src/autora',
-                                                       '/src/autora/experiment_runner',
-                                                       '/src/autora/experiment_runner/test_runner',
-                                                       '/src/autora/experiment_runner/test_runner/__init__.py']
+    assert d_subtypes['experiment_runner']['tree'] == \
+           convert_os_paths(['/src/autora',
+                             '/src/autora/experiment_runner',
+                             '/src/autora/experiment_runner/test_runner',
+                             '/src/autora/experiment_runner/test_runner/__init__.py'])
 
-    assert d_subtypes['experimentation_manager']['tree'] == ['/src/autora',
-                                                             '/src/autora/experiment_runner',
-                                                             '/src/autora/experiment_runner/experimentation_manager',
-                                                             '/src/autora/experiment_runner/experimentation_manager/test_runner',
-                                                             '/src/autora/experiment_runner/experimentation_manager/test_runner/__init__.py']
+    assert d_subtypes['experimentation_manager']['tree'] == \
+           convert_os_paths(['/src/autora',
+                             '/src/autora/experiment_runner',
+                             '/src/autora/experiment_runner/experimentation_manager',
+                             '/src/autora/experiment_runner/experimentation_manager/test_runner',
+                             '/src/autora/experiment_runner/experimentation_manager/test_runner/__init__.py'])
 
-    assert d_subtypes['recruitment_manager']['tree'] == ['/src/autora',
-                                                         '/src/autora/experiment_runner',
-                                                         '/src/autora/experiment_runner/recruitment_manager',
-                                                         '/src/autora/experiment_runner/recruitment_manager/test_runner',
-                                                         '/src/autora/experiment_runner/recruitment_manager/test_runner/__init__.py']
+    assert d_subtypes['recruitment_manager']['tree'] == \
+           convert_os_paths(['/src/autora',
+                             '/src/autora/experiment_runner',
+                             '/src/autora/experiment_runner/recruitment_manager',
+                             '/src/autora/experiment_runner/recruitment_manager/test_runner',
+                             '/src/autora/experiment_runner/recruitment_manager/test_runner/__init__.py'])
 
 
 def test_custom(cookies):
@@ -296,7 +307,7 @@ def test_custom(cookies):
         l_tree = [s.split(basename)[1] for s in l_tree]
 
         assert basename == 'autora-new_type-test_custom'
-        assert l_tree == ['/src/autora',
-                          '/src/autora/new_type',
-                          '/src/autora/new_type/test_custom',
-                          '/src/autora/new_type/test_custom/__init__.py']
+        assert l_tree == convert_os_paths(['/src/autora',
+                                           '/src/autora/new_type',
+                                           '/src/autora/new_type/test_custom',
+                                           '/src/autora/new_type/test_custom/__init__.py'])
