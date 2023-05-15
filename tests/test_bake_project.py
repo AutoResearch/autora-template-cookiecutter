@@ -394,10 +394,12 @@ def test_readme_population_by_contribution_type(cookies):
     assert '### Experimentalist' in d_readme['experimentalist-sampler'] and \
            all([s not in d_readme['experimentalist-sampler'] for s in experimentalist_absent])
     assert '*Sampler*' in d_readme['experimentalist-sampler']
+    assert '*Pooler*' not in d_readme['experimentalist-sampler']
 
     assert '### Experimentalist' in d_readme['experimentalist-pooler'] and \
            all([s not in d_readme['experimentalist-pooler'] for s in experimentalist_absent])
     assert '*Pooler*' in d_readme['experimentalist-pooler']
+    assert '*Sampler*' not in d_readme['experimentalist-pooler']
 
     ## Experiment Runner
     ### Base Runner
@@ -441,5 +443,6 @@ def test_readme_population_by_options(cookies):
                                                   "use_github_actions": "no",
                                                   }
                                                  )
+    assert '#### Step 5.2: Publish via Twine' in content_twine_no_dv
     assert '#### Dynamic versioning' not in content_twine_no_dv
     assert '- version' in content_twine_no_dv
