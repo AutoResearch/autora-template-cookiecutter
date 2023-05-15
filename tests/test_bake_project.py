@@ -189,7 +189,7 @@ def test_experimentalist(cookies):
     for i, (subtype, raw) in enumerate(zip(subtypes, subtypes_raw)):
         d_inputs = {"contribution_name": "test-experimentalist",
                     "autora_contribution_type": "experimentalist",
-                    "__experimentalist_type": raw
+                    "experimentalist_type": raw
                     }
         if subtype == 'custom':
             d_inputs['custom_experimentalist_type'] = 'new-type'
