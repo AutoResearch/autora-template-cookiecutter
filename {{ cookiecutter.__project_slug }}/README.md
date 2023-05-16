@@ -65,11 +65,11 @@ experiment conditions, which may include the recruitment of participants.<br>
 enables the collection of behavioral data from human participants via web-based experiments hosted on 
 [Firebase](https://firebase.google.com/), using a pool of participants registered through
 [Prolific](https://www.prolific.co/).* <br>
-{% if cookiecutter.experiement_runner_type == "recruitment_manager" -%}
+{% if cookiecutter.experiment_runner_type == "recruitment_manager" -%}
 *Recruitment Manager* is a method (or collection of methods) to recruit participants.<br>
 *Example: The [Prolific Recruitment Manager](https://github.com/AutoResearch/autora-experiment-runner-recruitment-manager-prolific)
 enables the recruitment of participants via Prolific.*
-{% elif cookiecutter.experiement_runner_type == "experimentation_manager" -%}
+{% elif cookiecutter.experiment_runner_type == "experimentation_manager" -%}
 *Experimentation Manager* is a method (or collection of methods) to handle the requisite experimentation processes.<br>
 *Example: The [Firebase Experimentation Manager](https://github.com/AutoResearch/autora-experiment-runner-experimentation-manager-firebase)
 enables the hosting of a web-based experiment on Firebase and the storage of conditions and observations via Firestore.*
