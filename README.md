@@ -5,12 +5,17 @@ This is a command line tool for creating the structure of a new AutoRA subpackag
 
 ## Usage
 
-First install the cookiecutter package:
+First, install the cookiecutter package. There are a number of [ways](https://cookiecutter.readthedocs.io/en/stable/installation.html#) to do so, but we recommend using pip via
 ```shell
 pip install cookiecutter
 ```
 
-to create the project, run 
+However you choose to install, you'll need version 2.1.1 or greater. To check your version, run
+```shell
+cookiecutter --version
+```
+
+Once you've confirmed your installation, you can create the project by running 
 ```shell
 cookiecutter https://github.com/AutoResearch/autora-template-cookiecutter
 ```
