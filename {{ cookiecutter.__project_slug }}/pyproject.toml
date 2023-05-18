@@ -1,9 +1,9 @@
 [project]
 # UPDATE THIS BEFORE PUBLISHING
-name = "{{ cookiecutter.__contribution_name_modulename }}"
+name = "{{ cookiecutter.__contrib_name_modulename }}"
 description = "{{ cookiecutter.project_short_description }}"
 authors = [{ name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" }]
-{% if cookiecutter.__contribution_utilities == "advanced" %}dynamic = ["version"]{% else %}version = "0.1.0"{% endif %}
+{% if cookiecutter.__contrib_utilities == "advanced" %}dynamic = ["version"]{% else %}version = "0.1.0"{% endif %}
 
 readme = "README.md"
 license = { text = "{{ cookiecutter.__license }}" }
@@ -27,8 +27,8 @@ documentation = "https://autoresearch.github.io/autora/"
 
 
 [build-system]
-{% if cookiecutter.__contribution_utilities == "advanced" %}requires = ["setuptools", "setuptools_scm"]{% else %}requires = ["setuptools"]{% endif %}
+{% if cookiecutter.__contrib_utilities == "advanced" %}requires = ["setuptools", "setuptools_scm"]{% else %}requires = ["setuptools"]{% endif %}
 build-backend = "setuptools.build_meta"
 
-{% if cookiecutter.__contribution_utilities == "advanced" %}[tool.setuptools_scm]
+{% if cookiecutter.__contrib_utilities == "advanced" %}[tool.setuptools_scm]
 {% endif %}

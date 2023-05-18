@@ -41,23 +41,23 @@ Contribution Guide).*
 
 ## Contribution Guide
 
-{% if cookiecutter.__contribution_type_modulename == "theorist" -%}
+{% if cookiecutter.__contrib_type_modulename == "theorist" -%}
 ### Theorist
 An sklearn regressor that returns an interpretable model relating experiment conditions $X$ to 
 observations $Y$.<br>
 *Example: The [Bayesian Machine Scientist](https://github.com/AutoResearch/autora-theorist-bms) (Guimerà et al., 2020, 
 in Science Advances) returns an equation governing the relationship between $X$ and $Y$.* <br>
-{% elif cookiecutter.__contribution_type_modulename == "experimentalist" -%}
+{% elif cookiecutter.__contrib_type_modulename == "experimentalist" -%}
 ### Experimentalist {{ cookiecutter.__experimentalist_type.capitalize() }}
 A method that identifies novel experiment conditions $X'$ that yield scientific merit.
-{% if cookiecutter.__contribution_subtype_modulename == "pooler" -%} 
+{% if cookiecutter.__contrib_subtype_modulename == "pooler" -%} 
 *Pooler* generate a pool of novel experiment conditions.
-{% elif cookiecutter.__contribution_subtype_modulename == "sampler" -%}
+{% elif cookiecutter.__contrib_subtype_modulename == "sampler" -%}
 *Sampler* select from an existing pool of experiment conditions $X$).<br>
 *Example: The [Novelty Sampler](https://github.com/AutoResearch/autora-novelty-sampler) selects novel experiment 
 conditions $X'$ with respect to a pairwise distance metric applied to existing experiment conditions $X$.*
 {% endif -%}
-{% elif cookiecutter.__contribution_type_modulename == "experiment_runner" -%}
+{% elif cookiecutter.__contrib_type_modulename == "experiment_runner" -%}
 ### Experiment Runners
 A method that orchestrates the collecting of observations for a given set of 
 experiment conditions, which may include the recruitment of participants.<br>
@@ -65,16 +65,16 @@ experiment conditions, which may include the recruitment of participants.<br>
 enables the collection of behavioral data from human participants via web-based experiments hosted on 
 [Firebase](https://firebase.google.com/), using a pool of participants registered through
 [Prolific](https://www.prolific.co/).* <br>
-{% if cookiecutter.__contribution_subtype_modulename == "recruitment_manager" -%}
+{% if cookiecutter.__contrib_subtype_modulename == "recruitment_manager" -%}
 *Recruitment Manager* is a method (or collection of methods) to recruit participants.<br>
 *Example: The [Prolific Recruitment Manager](https://github.com/AutoResearch/autora-experiment-runner-recruitment-manager-prolific)
 enables the recruitment of participants via Prolific.*
-{% elif cookiecutter.__contribution_subtype_modulename == "experimentation_manager" -%}
+{% elif cookiecutter.__contrib_subtype_modulename == "experimentation_manager" -%}
 *Experimentation Manager* is a method (or collection of methods) to handle the requisite experimentation processes.<br>
 *Example: The [Firebase Experimentation Manager](https://github.com/AutoResearch/autora-experiment-runner-experimentation-manager-firebase)
 enables the hosting of a web-based experiment on Firebase and the storage of conditions and observations via Firestore.*
 {% endif -%}
-{% elif cookiecutter.__contribution_type_modulename == "synthetic_data" -%}
+{% elif cookiecutter.__contrib_type_modulename == "synthetic_data" -%}
 ### Synthetic Data 
 A ground-truth model that implements a hypothesized relationship between experimental conditions
 $X$ and observations $Y$. Synthetic models may act as objects of study for which the underlying mechanisms are known, 
@@ -91,7 +91,7 @@ in the `__init__.py` if it is implemented elswhere.
 
 ### Step 2 (Optional): Add Tests
 
-It is highly encouraged to add unit tests to ensure your code is working as intended. These can be [doctests](https://docs.python.org/3/library/doctest.html) or test cases in `tests/test_{{ cookiecutter.__contribution_name_modulename }}.py`.
+It is highly encouraged to add unit tests to ensure your code is working as intended. These can be [doctests](https://docs.python.org/3/library/doctest.html) or test cases in `tests/test_{{ cookiecutter.__contrib_name_modulename }}.py`.
 
 *Note: Tests are required if you wish that your feature becomes part of the main 
 [autora](https://github.com/AutoResearch/autora) package. However, regardless of whether you choose to implement tests, 
@@ -129,14 +129,14 @@ To begin publishing your package, update the metadata under `project` in the pyp
 - description
 - author-name
 - author-email
-{% if cookiecutter.__contribution_utilities == "basic" -%}
+{% if cookiecutter.__contrib_utilities == "basic" -%}
 - version
 {% endif -%}
 
 
 Also, update the URL for the repository under `project.urls`.
 
-{% if cookiecutter.__contribution_utilities == "advanced" -%}
+{% if cookiecutter.__contrib_utilities == "advanced" -%}
 #### Step 5.2 Publish via GitHub Actions
 
 To automate the publishing process for your package, you can use a GitHub action:
@@ -152,7 +152,7 @@ To automate the publishing process for your package, you can use a GitHub action
 {% else -%}
 #### Step 5.2: Publish via Twine
 You can follow the guide here: https://packaging.python.org/en/latest/tutorials/packaging-projects/
-{% if cookiecutter.__contribution_utilities == "advanced" -%}
+{% if cookiecutter.__contrib_utilities == "advanced" -%}
 #### Dynamic versioning
 If you are using dynamic versioning with Twine, follow these steps to publish your package:
 - Commit all of your changes.

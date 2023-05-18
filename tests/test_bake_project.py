@@ -117,7 +117,7 @@ def test_bake_with_defaults(cookies):
 
 def test_dynamic_numbering(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
-                                                  "__contribution_utilities": "advanced"}) as result:
+                                                  "__contrib_utilities": "advanced"}) as result:
         with open(result.project / 'pyproject.toml') as file:
             content = file.read()
         assert 'dynamic = ["version"]' in content
@@ -126,7 +126,7 @@ def test_dynamic_numbering(cookies):
         assert '[tool.setuptools_scm]' in content
 
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
-                                                  "__contribution_utilities": "basic"}) as result:
+                                                  "__contrib_utilities": "basic"}) as result:
         with open(result.project / 'pyproject.toml') as file:
             content = file.read()
         assert 'dynamic = ["version"]' not in content
@@ -137,7 +137,7 @@ def test_dynamic_numbering(cookies):
 
 def test_github_actions_removal(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
-                                                  "__contribution_utilities": "basic"}) as result:
+                                                  "__contrib_utilities": "basic"}) as result:
         assert check_construct(result)
         found_toplevel_files = [f.basename for f in result.project.listdir()]
         assert '.github' not in found_toplevel_files
@@ -145,7 +145,7 @@ def test_github_actions_removal(cookies):
 
 def test_precommit_hooks_file_removal(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
-                                                  "__contribution_utilities": "basic"}) as result:
+                                                  "__contri_utilities": "basic"}) as result:
         assert check_construct(result)
         found_toplevel_files = [f.basename for f in result.project.listdir()]
         assert '.pre-commit-config.yaml' not in found_toplevel_files
@@ -422,14 +422,14 @@ def test_readme_population_by_contribution_type(cookies):
 def test_readme_population_by_options(cookies):
     content_gh = bake_and_return_readme(cookies,
                                         {"contribution_name": "test_readme",
-                                         "__contribution_utilities": "advanced"})
+                                         "__contrib_utilities": "advanced"})
     assert '#### Step 5.2 Publish via GitHub Actions' in content_gh
     assert '#### Step 5.2: Publish via Twine' not in content_gh
 
 
     content_twine_no_dv = bake_and_return_readme(cookies,
                                                  {"contribution_name": "test_readme",
-                                                  "__contribution_utilities": "basic",
+                                                  "__contrib_utilities": "basic",
                                                   }
                                                  )
     assert '#### Step 5.2: Publish via Twine' in content_twine_no_dv

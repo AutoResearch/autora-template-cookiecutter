@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 INHERIT: mkdocs/base.yml  # use the shared AutoRA configuration by default
 
-site_name: AutoRA {{ cookiecutter.__contribution_name }}
+site_name: AutoRA {{ cookiecutter.__contrib_name }}
 repo_url: '{{ cookiecutter.__repository }}'
 
 nav:

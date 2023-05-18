@@ -4,7 +4,7 @@ You will need:
 
 - `python` 3.8 or greater: [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
-*{{ cookiecutter.__contribution_name }} is a part of the `autora` package:
+*{{ cookiecutter.__contrib_name }} is a part of the `autora` package:
 
 ```shell
 pip install -U autora["{{ cookiecutter.__full_name }}"]
