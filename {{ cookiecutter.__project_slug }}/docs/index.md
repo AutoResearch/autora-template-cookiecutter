@@ -2,33 +2,21 @@
 
 Explain what your contribution is doing here
 
-You can include inline mathematics like this: \(3 < 4\)
+You can include inline mathematics by wrapping LaTeX formatted math in `$` symbols: `$(3 < 4)$` will render as:  $(3 < 4)$
 
-Include block mathematics like this (don't forget the empty lines above and below the block):
+To include block mathematics wrap the expression with double `$$`:
 
-$$  
-y + 1 = 4 
+```
+$$
+E(\mathbf{v}, \mathbf{h}) = -\sum_{i,j}w_{ij}v_i h_j - \sum_i b_i v_i - \sum_j c_j h_j
+$$
+```
+Will render as:
+$$
+E(\mathbf{v}, \mathbf{h}) = -\sum_{i,j}w_{ij}v_i h_j - \sum_i b_i v_i - \sum_j c_j h_j
 $$
 
-... or this:
 
-\[
-E(\mathbf{v}, \mathbf{h}) = -\sum_{i,j}w_{ij}v_i h_j - \sum_i b_i v_i - \sum_j c_j h_j
-\]
-
-... or this:
-
-\begin{align}
-    p(v_i=1|\mathbf{h}) & = \sigma\left(\sum_j w_{ij}h_j + b_i\right) \\
-    p(h_j=1|\mathbf{v}) & = \sigma\left(\sum_i w_{ij}v_i + c_j\right)
-\end{align}
-
-
-Include inline mathematics like this \(x < 1\) or this $c = 3$ or this
-or block mathematics:
-
-\[
-x + 1 = 3
-\]
+See more information on writing mathematical expressions [here](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions). 
 
 
