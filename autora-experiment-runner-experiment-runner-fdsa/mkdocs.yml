@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+INHERIT: mkdocs/base.yml  # use the shared AutoRA configuration by default
+
+site_name: AutoRA fdsa
+repo_url: ''
+
+nav:
+- Home: 'index.md'
+- Quickstart: 'quickstart.md'
+- Examples:
+  - Basic Usage: 'basic-usage.ipynb'
+  - Additional Example: 'additional-example.ipynb'

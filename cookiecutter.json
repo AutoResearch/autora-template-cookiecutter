@@ -19,7 +19,7 @@
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner [DEFAULT]{% else -%}N/A - Press Enter to Skip{% endif -%}", 
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}", 
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to Skip{% endif -%}"],
-  "__contribution_subtype": "{% if cookiecutter.__autora_contribution_type == 'experimentalist' -%}{{ cookiecutter.__experimentalist_type }}{% elif cookiecutter.__autora_contribution_type == 'experiment_runner' and cookiecutter.experiment_runner_type != 'experiment_runner' -%}{{ cookiecutter.experiment_runner_type }}{% else -%}not_applicable{% endif -%}",
+  "__contribution_subtype": "{% if cookiecutter.__autora_contribution_type == 'experimentalist' -%}{{ cookiecutter.__experimentalist_type }}{% elif cookiecutter.__autora_contribution_type == 'experiment_runner' and cookiecutter.experiment_runner_type != 'experiment_runner [DEFAULT]' -%}{{ cookiecutter.experiment_runner_type }}{% else -%}not_applicable{% endif -%}",
   "advanced_contribution_utilities": ["basic contribution [DEFAULT]", "advanced contribution (dynamic versioning, GitHub actions, pre commit hooks)"],
   "__contribution_utilities": "{% if cookiecutter.advanced_contribution_utilities == 'basic contribution [DEFAULT]' -%}basic{% else -%}advanced{% endif -%}",
   "license": ["MIT license [DEFAULT]", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
@@ -30,7 +30,7 @@
   "__contribution_type_url": "{{ cookiecutter.__contribution_type_modulename.replace('_', '-') }}",
   "__contribution_subtype_url": "{{ cookiecutter.__contribution_subtype_modulename.replace('_', '-') }}",
   "__contribution_name_url": "{{ cookiecutter.__contribution_name_modulename.replace('_', '-') }}",
-  "__full_path": "{{ cookiecutter.__contribution_type_modulename }}/{% if cookiecutter.__contribution_subtype != 'not_applicable' -%}{{ cookiecutter.__contribution_subtype_modulen }}/{% endif -%}{{ cookiecutter.__contribution_name_modulename }}",
+  "__full_path": "{{ cookiecutter.__contribution_type_modulename }}/{% if cookiecutter.__contribution_subtype != 'not_applicable' -%}{{ cookiecutter.__contribution_subtype_modulename }}/{% endif -%}{{ cookiecutter.__contribution_name_modulename }}",
   "__full_name": "{{ cookiecutter.__contribution_type_url }}-{% if cookiecutter.__contribution_subtype != 'not_applicable' -%}{{ cookiecutter.__contribution_subtype_url }}-{% endif -%}{{ cookiecutter.__contribution_name_url }}",
   "__project_slug": "autora-{{ cookiecutter.__full_name }}"
 }

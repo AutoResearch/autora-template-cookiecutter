@@ -104,11 +104,11 @@ def test_bake_with_defaults(cookies):
         # All top level files/directories are correct
         found_toplevel_files = [f.basename for f in result.project.listdir()]
         assert 'mkdocs.yml' in found_toplevel_files
-        assert '.pre-commit-config.yaml' in found_toplevel_files
+        assert not '.pre-commit-config.yaml' in found_toplevel_files
         assert 'pyproject.toml' in found_toplevel_files
         assert 'README.md' in found_toplevel_files
         assert '.gitignore' in found_toplevel_files
-        assert '.github' in found_toplevel_files
+        assert not '.github' in found_toplevel_files
         assert 'tests' in found_toplevel_files
         assert 'docs' in found_toplevel_files
         assert 'mkdocs' in found_toplevel_files
@@ -116,9 +116,8 @@ def test_bake_with_defaults(cookies):
 
 
 def test_dynamic_numbering(cookies):
-    # Test use_dynamic_versioning = yes
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
-                                                  "use_dynamic_versioning": "yes"}) as result:
+                                                  "__contribution_utilities": "advanced"}) as result:
         with open(result.project / 'pyproject.toml') as file:
             content = file.read()
         assert 'dynamic = ["version"]' in content
@@ -126,9 +125,8 @@ def test_dynamic_numbering(cookies):
         assert 'requires = ["setuptools", "setuptools_scm"]' in content
         assert '[tool.setuptools_scm]' in content
 
-    # Test use_dynamic_versioning = no
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
-                                                  "use_dynamic_versioning": "no"}) as result:
+                                                  "__contribution_utilities": "basic"}) as result:
         with open(result.project / 'pyproject.toml') as file:
             content = file.read()
         assert 'dynamic = ["version"]' not in content
@@ -139,7 +137,7 @@ def test_dynamic_numbering(cookies):
 
 def test_github_actions_removal(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
-                                                  "use_github_actions": "no"}) as result:
+                                                  "__contribution_utilities": "basic"}) as result:
         assert check_construct(result)
         found_toplevel_files = [f.basename for f in result.project.listdir()]
         assert '.github' not in found_toplevel_files
@@ -147,7 +145,7 @@ def test_github_actions_removal(cookies):
 
 def test_precommit_hooks_file_removal(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
-                                                  "use_pre_commit_hooks": "no"}) as result:
+                                                  "__contribution_utilities": "basic"}) as result:
         assert check_construct(result)
         found_toplevel_files = [f.basename for f in result.project.listdir()]
         assert '.pre-commit-config.yaml' not in found_toplevel_files
@@ -186,7 +184,7 @@ def test_mkdocs_population(cookies):
 
 def test_theorist(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test-theorist",
-                                                  "autora_contribution_type": "theorist",
+                                                  "autora_contribution_type": "theorist [DEFAULT]",
                                                   }) as result:
         assert check_construct(result)
 
@@ -205,10 +203,10 @@ def test_theorist(cookies):
 
 def test_experimentalist(cookies):
     subtypes_raw = [
-        "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}sampler{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}sampler [DEFAULT]{% else -%}N/A - Press Enter to Skip{% endif -%}",
         "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}pooler{% else -%}N/A - Press Enter to Skip{% endif -%}",
         "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}custom{% else -%}N/A - Press Enter to Skip{% endif -%}"]
-    subtypes = ['sampler', 'pooler', 'custom']
+    subtypes = ['sampler [DEFAULT]', 'pooler', 'custom']
 
     d_subtypes = {}
     for i, (subtype, raw) in enumerate(zip(subtypes, subtypes_raw)):
@@ -231,7 +229,7 @@ def test_experimentalist(cookies):
             d_subtypes[subtype] = {'basename': basename, 'tree': l_tree}
 
     # Check directory names
-    assert d_subtypes['sampler'][
+    assert d_subtypes['sampler [DEFAULT]'][
                'basename'] == 'autora-experimentalist-sampler-test-experimentalist'
     assert d_subtypes['pooler'][
                'basename'] == 'autora-experimentalist-pooler-test-experimentalist'
@@ -239,7 +237,7 @@ def test_experimentalist(cookies):
                'basename'] == 'autora-experimentalist-new-type-test-experimentalist'
 
     # Check directory trees
-    assert d_subtypes['sampler']['tree'] == convert_os_paths(
+    assert d_subtypes['sampler [DEFAULT]']['tree'] == convert_os_paths(
         ['/src/autora', '/src/autora/experimentalist',
          '/src/autora/experimentalist/sampler',
          '/src/autora/experimentalist/sampler/test_experimentalist',
@@ -260,10 +258,10 @@ def test_experimentalist(cookies):
 
 def test_runner(cookies):
     subtypes_raw = [
-        "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner [DEFAULT]{% else -%}N/A - Press Enter to Skip{% endif -%}",
         "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}",
         "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to Skip{% endif -%}"]
-    subtypes = ['experiment_runner', 'experimentation_manager', 'recruitment_manager']
+    subtypes = ['experiment_runner [DEFAULT]', 'experimentation_manager', 'recruitment_manager']
 
     d_subtypes = {}
     for i, (subtype, raw) in enumerate(zip(subtypes, subtypes_raw)):
@@ -284,15 +282,15 @@ def test_runner(cookies):
             d_subtypes[subtype] = {'basename': basename, 'tree': l_tree}
 
     # Check directory names
-    assert d_subtypes['experiment_runner'][
-               'basename'] == 'autora-experiment_runner-test_runner'
+    assert d_subtypes['experiment_runner [DEFAULT]'][
+               'basename'] == 'autora-experiment-runner-test-runner'
     assert d_subtypes['experimentation_manager'][
-               'basename'] == 'autora-experiment_runner-experimentation_manager-test_runner'
+               'basename'] == 'autora-experiment-runner-experimentation-manager-test-runner'
     assert d_subtypes['recruitment_manager'][
-               'basename'] == 'autora-experiment_runner-recruitment_manager-test_runner'
+               'basename'] == 'autora-experiment-runner-recruitment-manager-test-runner'
 
     # Check directory trees
-    assert d_subtypes['experiment_runner']['tree'] == \
+    assert d_subtypes['experiment_runner [DEFAULT]']['tree'] == \
            convert_os_paths(['/src/autora',
                              '/src/autora/experiment_runner',
                              '/src/autora/experiment_runner/test_runner',
@@ -326,7 +324,7 @@ def test_custom(cookies):
         l_tree = tree_list(result.project / 'src')
         l_tree = [Path(s.split(basename)[1]) for s in l_tree]
 
-        assert basename == 'autora-new_type-test_custom'
+        assert basename == 'autora-new-type-test-custom'
         assert l_tree == convert_os_paths(['/src/autora',
                                            '/src/autora/new_type',
                                            '/src/autora/new_type/test_custom',
@@ -338,7 +336,7 @@ def test_readme_populate_defaults(cookies):
     content = bake_and_return_readme(cookies, d_inputs)
 
     slug_text = f"(a sensible name for the repository would be " \
-                f"autora-theorist-{d_inputs['contribution_name']})"
+                f"autora-theorist-{d_inputs['contribution_name'].lower().replace('_','-')})"
     assert slug_text in content
 
     full_path_text = "add your code to `src/autora/theorist/test_readme/__init__.py`"
@@ -349,14 +347,14 @@ def test_readme_populate_defaults(cookies):
 
 
 def test_readme_population_by_contribution_type(cookies):
-    l_contribution_types = ["theorist", "experimentalist", "experiment_runner", "synthetic_data"]
+    l_contribution_types = ["theorist [DEFAULT]", "experimentalist", "experiment_runner", "synthetic_data"]
     d_contribution_subtypes = {'experimentalist': ['pooler', 'sampler'],
                                'experiment_runner': ['experiment_runner', 'experimentation_manager',
                                                      'recruitment_manager']}
     d_subtypes_raw = {
-        "sampler": "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}sampler{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "sampler": "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}sampler [DEFAULT]{% else -%}N/A - Press Enter to Skip{% endif -%}",
         "pooler": "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}pooler{% else -%}N/A - Press Enter to Skip{% endif -%}",
-        "experiment_runner": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "experiment_runner": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner [DEFAULT]{% else -%}N/A - Press Enter to Skip{% endif -%}",
         "experimentation_manager": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}",
         "recruitment_manager": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to Skip{% endif -%}"
     }
@@ -386,8 +384,8 @@ def test_readme_population_by_contribution_type(cookies):
     # Assert presence and absence of appropriate headers
     ## Theorist
     theorist_absent = ["### Experimentalist", "### Experiment Runners", "### Synthetic Data "]
-    assert '### Theorist' in d_readme['theorist'] and \
-           all([s not in d_readme['theorist'] for s in theorist_absent])
+    assert '### Theorist' in d_readme['theorist [DEFAULT]'] and \
+           all([s not in d_readme['theorist [DEFAULT]'] for s in theorist_absent])
 
     ## Experimentalist
     experimentalist_absent = ["### Theorist", "### Experiment Runners", "### Synthetic Data "]
@@ -424,23 +422,14 @@ def test_readme_population_by_contribution_type(cookies):
 def test_readme_population_by_options(cookies):
     content_gh = bake_and_return_readme(cookies,
                                         {"contribution_name": "test_readme",
-                                         "use_github_actions": "yes"})
+                                         "__contribution_utilities": "advanced"})
     assert '#### Step 5.2 Publish via GitHub Actions' in content_gh
     assert '#### Step 5.2: Publish via Twine' not in content_gh
 
-    content_twine = bake_and_return_readme(cookies,
-                                           {"contribution_name": "test_readme",
-                                            "use_dynamic_versioning": "yes",
-                                            "use_github_actions": "no",
-                                            }
-                                           )
-    assert '#### Step 5.2: Publish via Twine' in content_twine
-    assert '#### Dynamic versioning' in content_twine
 
     content_twine_no_dv = bake_and_return_readme(cookies,
                                                  {"contribution_name": "test_readme",
-                                                  "use_dynamic_versioning": "no",
-                                                  "use_github_actions": "no",
+                                                  "__contribution_utilities": "basic",
                                                   }
                                                  )
     assert '#### Step 5.2: Publish via Twine' in content_twine_no_dv
