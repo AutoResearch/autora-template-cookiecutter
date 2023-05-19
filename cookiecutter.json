@@ -1,6 +1,6 @@
 {
   "full_name": "Enter your full name",
-  "email": "Enter your e-mail adress",
+  "email": "Enter your email address",
   "contribution_name": "Choose a name of your contribution here. This will also be your package name. Choose something short but descriptive",
   "__contrib_name": "{% if cookiecutter.contribution_name == 'Choose a name of your contribution here. This will also be your package name. Choose something short but descriptive' -%}{% else -%}{{ cookiecutter.contribution_name }}{% endif -%}",
   "project_short_description": "Describe your contribution",
