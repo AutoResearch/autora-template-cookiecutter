@@ -353,7 +353,7 @@ def test_readme_population_by_contribution_type(cookies):
                                                      'recruitment_manager']}
     d_subtypes_raw = {
         "sampler": "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}sampler [DEFAULT]{% else -%}N/A - Press Enter to Skip{% endif -%}",
-        "pooler": "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}pooler{% else -%}N/A - Press Enter to Skip{% endif -%}",
+        "pooler": "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}pooler{% else -%}N/A - Press Enter to skip{% endif -%}",
         "experiment_runner": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner [DEFAULT]{% else -%}N/A - Press Enter to Skip{% endif -%}",
         "experimentation_manager": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}",
         "recruitment_manager": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to Skip{% endif -%}"
