@@ -17,7 +17,7 @@
   "__experimentalist_type": "{% if cookiecutter.autora_contribution_type == 'experimentalist' and cookiecutter.experimentalist_type == 'custom' -%}{{ cookiecutter.custom_experimentalist_type }}{% else -%}{{ cookiecutter.experimentalist_type }}{% endif -%}",
   "experiment_runner_type": [
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner [DEFAULT]{% else -%}N/A - Press Enter to Skip{% endif -%}", 
-    "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to Skip{% endif -%}", 
+    "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to skip{% endif -%}", 
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to Skip{% endif -%}"],
   "__contrib_subtype": "{% if cookiecutter.__autora_contribution_type == 'experimentalist' -%}{{ cookiecutter.__experimentalist_type }}{% elif cookiecutter.__autora_contribution_type == 'experiment_runner' and cookiecutter.experiment_runner_type != 'experiment_runner [DEFAULT]' -%}{{ cookiecutter.experiment_runner_type }}{% else -%}not_applicable{% endif -%}",
   "advanced_contribution_utilities": ["basic contribution [DEFAULT]", "advanced contribution (dynamic versioning, GitHub actions, pre commit hooks)"],
