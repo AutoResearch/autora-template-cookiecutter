@@ -1,7 +1,7 @@
 {
   "full_name": "Enter your full name",
   "email": "Enter your email address",
-  "contribution_name": "Choose a name of your contribution here. This will also be your package name. Choose something short but descriptive",
+  "contribution_name": "Choose a name for your contribution here. This will also be your package name. It's best to choose something short but descriptive",
   "__contrib_name": "{% if cookiecutter.contribution_name == 'Choose a name of your contribution here. This will also be your package name. Choose something short but descriptive' -%}{% else -%}{{ cookiecutter.contribution_name }}{% endif -%}",
   "project_short_description": "Describe your contribution",
   "repository": "If you have already created a GitHub repository for your package, you can paste in the url to here",
