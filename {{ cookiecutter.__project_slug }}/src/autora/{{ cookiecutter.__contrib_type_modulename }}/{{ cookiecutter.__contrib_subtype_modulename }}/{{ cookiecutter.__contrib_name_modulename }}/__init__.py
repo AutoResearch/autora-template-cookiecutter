@@ -93,7 +93,7 @@ def example_pool(argument: float) -> float:
     return new_conditions
 {% elif cookiecutter.__contrib_subtype_modulename != "not_applicable" -%}
 """
-Example Experimantalist {{ cookiecutter.__contrib_type_modulename }}
+Example Experimentalist {{ cookiecutter.__contrib_type_modulename }}
 """
 
 
