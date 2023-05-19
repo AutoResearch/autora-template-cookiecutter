@@ -1,4 +1,4 @@
-# {{ cookiecutter.contribution_name }}
+# {{ cookiecutter.__contrib_name }}
 
 Explain what your contribution is doing here
 

@@ -21,16 +21,16 @@ def move_files_to_parent_folder(folder_path):
 
 if __name__ == '__main__':
     # Move file to upper level if no contribution subtype
-    if 'not_applicable' == '{{ cookiecutter.__contribution_subtype }}':
+    if 'not_applicable' == '{{ cookiecutter.__contrib_subtype }}':
         shutil.move(
-            'src/autora/{{ cookiecutter.__contribution_type_modulename }}/not_applicable/{{ cookiecutter.__python_name }}',
-            'src/autora/{{ cookiecutter.__contribution_type_modulename }}/{{ cookiecutter.__python_name }}',)
-        os.rmdir('src/autora/{{ cookiecutter.__contribution_type_modulename }}/not_applicable')
+            'src/autora/{{ cookiecutter.__contrib_type_modulename }}/not_applicable/{{ cookiecutter.__contrib_name_modulename }}',
+            'src/autora/{{ cookiecutter.__contrib_type_modulename }}/{{ cookiecutter.__contrib_name_modulename }}',)
+        os.rmdir('src/autora/{{ cookiecutter.__contrib_type_modulename }}/not_applicable')
     # Remove .pre-commit-config.yaml file if not using pre-commit hooks
-    if 'no' == '{{ cookiecutter.use_pre_commit_hooks }}':
+    if 'basic' == '{{ cookiecutter.__contrib_utilities }}':
         os.remove('.pre-commit-config.yaml')
     # Remove .github directory if not using github actions
-    if 'no' == '{{ cookiecutter.use_github_actions }}':
+    if 'basic' == '{{ cookiecutter.__contrib_utilities }}':
         shutil.rmtree('.github')
 
 

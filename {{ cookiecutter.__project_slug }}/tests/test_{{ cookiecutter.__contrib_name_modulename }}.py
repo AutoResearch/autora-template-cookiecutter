@@ -1,11 +1,11 @@
-{% if cookiecutter.__autora_contribution_type == "theorist" -%}
+{% if cookiecutter.__contrib_type_modulename == "theorist" -%}
 from autora.{{ cookiecutter.__full_path.lower().replace('/','.') }} import ExampleRegressor
 
 def test():
     theorist = ExampleRegressor()
     assert theorist is not None
-{% elif cookiecutter.__autora_contribution_type == "experimentalist" -%}
-{% if cookiecutter.__contribution_subtype == "sampler" -%}
+{% elif cookiecutter.__contrib_type_modulename == "experimentalist" -%}
+{% if cookiecutter.__contrib_subtype_modulename == "sampler" -%}
 from autora.{{ cookiecutter.__full_path.lower().replace('/','.') }} import example_sampler
 import numpy as np
 
@@ -16,7 +16,7 @@ def test_output_dimensions():
 
     # Check that the sampler returns n experiment conditions
     assert X_new.shape == (n, X.shape[1])
-{% elif cookiecutter.__contribution_subtype == "pooler" -%}
+{% elif cookiecutter.__contrib_subtype_modulename == "pooler" -%}
 from autora.{{ cookiecutter.__full_path.lower().replace('/','.') }} import example_pool
 
 

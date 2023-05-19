@@ -1,12 +1,12 @@
 [project]
 # UPDATE THIS BEFORE PUBLISHING
-name = "{{ cookiecutter.contribution_name }}"
+name = "{{ cookiecutter.__contrib_name_modulename }}"
 description = "{{ cookiecutter.project_short_description }}"
 authors = [{ name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" }]
-{% if cookiecutter.use_dynamic_versioning == "yes" %}dynamic = ["version"]{% else %}version = "0.1.0"{% endif %}
+{% if cookiecutter.__contrib_utilities == "advanced" %}dynamic = ["version"]{% else %}version = "0.1.0"{% endif %}
 
 readme = "README.md"
-license = { text = "{{ cookiecutter.license }}" }
+license = { text = "{{ cookiecutter.__license }}" }
 requires-python = ">=3.8,<4"
 
 # ADD NEW DEPENDENCIES HERE
@@ -22,13 +22,13 @@ dev = [
 
 [project.urls]
 homepage = "http://www.empiricalresearch.ai"
-repository = "{{ cookiecutter.repository }}"
+repository = "{{ cookiecutter.__repository }}"
 documentation = "https://autoresearch.github.io/autora/"
 
 
 [build-system]
-{% if cookiecutter.use_dynamic_versioning == "yes" %}requires = ["setuptools", "setuptools_scm"]{% else %}requires = ["setuptools"]{% endif %}
+{% if cookiecutter.__contrib_utilities == "advanced" %}requires = ["setuptools", "setuptools_scm"]{% else %}requires = ["setuptools"]{% endif %}
 build-backend = "setuptools.build_meta"
 
-{% if cookiecutter.use_dynamic_versioning == "yes" %}[tool.setuptools_scm]
+{% if cookiecutter.__contrib_utilities == "advanced" %}[tool.setuptools_scm]
 {% endif %}

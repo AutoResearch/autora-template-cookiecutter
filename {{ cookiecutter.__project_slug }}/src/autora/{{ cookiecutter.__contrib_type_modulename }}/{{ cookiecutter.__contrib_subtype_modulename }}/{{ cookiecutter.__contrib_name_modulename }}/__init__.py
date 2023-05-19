@@ -1,4 +1,4 @@
-{% if cookiecutter.__autora_contribution_type == "theorist" -%}
+{% if cookiecutter.__contrib_type_modulename == "theorist" -%}
 """
 Example Theorist
 """
@@ -31,8 +31,8 @@ class ExampleRegressor(BaseEstimator):
 
     def predict(self, conditions):
         pass
-{% elif cookiecutter.__autora_contribution_type == "experimentalist" -%}
-{% if cookiecutter.__contribution_subtype == "sampler" -%}
+{% elif cookiecutter.__contrib_type_modulename == "experimentalist" -%}
+{% if cookiecutter.__contrib_subtype_modulename == "sampler" -%}
 """
 Example Experimentalist Sampler
 """
@@ -68,7 +68,7 @@ def example_sampler(
     new_conditions = condition_pool
 
     return new_conditions[:num_samples]
-{% elif cookiecutter.__contribution_subtype == "pooler" -%}
+{% elif cookiecutter.__contrib_subtype_modulename == "pooler" -%}
 """
 Example Experimentalist Pooler
 """
@@ -91,9 +91,9 @@ def example_pool(argument: float) -> float:
     new_conditions = argument
 
     return new_conditions
-{% elif cookiecutter.__contribution_subtype != "not-applicable" -%}
+{% elif cookiecutter.__contrib_subtype_modulename != "not_applicable" -%}
 """
-Example Experimantalist {{ cookiecutter.custom_experimentalist_type }}
+Example Experimentalist {{ cookiecutter.__contrib_type_modulename }}
 """
 
 
@@ -112,8 +112,8 @@ def example(argument: float) -> float:
     """
     return argument
 {% endif -%}
-{% elif cookiecutter.__autora_contribution_type == "experiment_runner" -%}
-{% if cookiecutter.__contribution_subtype == "experiment_runner" -%}
+{% elif cookiecutter.__contrib_type_modulename == "experiment_runner" -%}
+{% if cookiecutter.__contrib_subtype_modulename == "experiment_runner" -%}
 """
 Example Experiment Runner
 """
@@ -131,7 +131,7 @@ def example_runner(conditions):
     observations = conditions
 
     return observations
-{% elif cookiecutter.__contribution_subtype == "experimentation_manager" -%}
+{% elif cookiecutter.__contrib_subtype_modulename == "experimentation_manager" -%}
 """
 Example Experimentation Manager
 
@@ -163,7 +163,7 @@ def get_observations(args):
     """
     observations = None
     return observations
-{% elif cookiecutter.__contribution_subtype == "recruitment_manager" -%}
+{% elif cookiecutter.__contrib_subtype_modulename == "recruitment_manager" -%}
 """
 Example Recruitment Manager
 
@@ -214,12 +214,12 @@ def check_recruitment_status(args):
     """
     pass
 {% endif -%}
-{% elif cookiecutter.__autora_contribution_type == "synthetic_data" -%}
+{% elif cookiecutter.__contrib_type_modulename == "synthetic_data" -%}
 """ 
 Example Synthetic Data
 
 """
 {% else -%}
 """
-Example {{ cookiecutter.__autora_contribution_type }}
+Example {{ cookiecutter.__contrib_type_modulename }}
 {% endif -%}
