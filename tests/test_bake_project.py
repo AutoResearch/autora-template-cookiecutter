@@ -115,40 +115,42 @@ def test_bake_with_defaults(cookies):
         assert 'src' in found_toplevel_files
 
 
-def test_dynamic_numbering(cookies):
-    with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
-                                                  "__contrib_utilities": "advanced"}) as result:
-        with open(result.project / 'pyproject.toml') as file:
-            content = file.read()
-        assert 'dynamic = ["version"]' in content
-        assert 'version = "0.1.0"' not in content
-        assert 'requires = ["setuptools", "setuptools_scm"]' in content
-        assert '[tool.setuptools_scm]' in content
-
+def test_basic_utils(cookies):
     with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
                                                   "__contrib_utilities": "basic"}) as result:
+        # Dynamic versioning is not set
         with open(result.project / 'pyproject.toml') as file:
             content = file.read()
-        assert 'dynamic = ["version"]' not in content
         assert 'version = "0.1.0"' in content
+        assert 'dynamic = ["version"]' not in content
         assert 'requires = ["setuptools", "setuptools_scm"]' not in content
         assert '[tool.setuptools_scm]' not in content
 
-
-def test_github_actions_removal(cookies):
-    with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
-                                                  "__contrib_utilities": "basic"}) as result:
-        assert check_construct(result)
+        # Check for files
         found_toplevel_files = [f.basename for f in result.project.listdir()]
+        # GitHub Actions Check
         assert '.github' not in found_toplevel_files
-
-
-def test_precommit_hooks_file_removal(cookies):
-    with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
-                                                  "__contri_utilities": "basic"}) as result:
-        assert check_construct(result)
-        found_toplevel_files = [f.basename for f in result.project.listdir()]
+        # Pre-commit check
         assert '.pre-commit-config.yaml' not in found_toplevel_files
+
+
+def test_advanced_utils(cookies):
+    with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test",
+                                                  "__contrib_utilities": "advanced"}) as result:
+        # Dynamic versioning check
+        with open(result.project / 'pyproject.toml') as file:
+            content = file.read()
+        assert 'version = "0.1.0"' not in content
+        assert 'dynamic = ["version"]' in content
+        assert 'requires = ["setuptools", "setuptools_scm"]' in content
+        assert '[tool.setuptools_scm]' in content
+
+        # Check for files
+        found_toplevel_files = [f.basename for f in result.project.listdir()]
+        # GitHub Actions Check
+        assert '.github' in found_toplevel_files
+        # Pre-commit check
+        assert '.pre-commit-config.yaml' in found_toplevel_files
 
 
 def test_pyproject_toml_population(cookies):
