@@ -8,5 +8,5 @@ nav:
 - Home: 'index.md'
 - Quickstart: 'quickstart.md'
 - Examples:
-  - Basic Usage: 'basic-usage.ipynb'
-  - Additional Example: 'additional-example.ipynb'
+  - Basic Usage: 'Basic Usage.ipynb'
+  - Additional Example: 'Additional Example.ipynb'
