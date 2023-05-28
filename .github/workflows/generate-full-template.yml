@@ -1,0 +1,30 @@
+name: Create, push and delete folder
+
+on:
+  workflow_dispatch
+
+
+jobs:
+  push_to_another_repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Repo
+        uses: actions/checkout@v2
+
+      - name: Run your code
+        run: |
+          python generate_full/generate.py
+
+      - name: Push to Target Repo
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GIT_TARGET_TOKEN }}
+        with:
+          source-directory: 'generate_full/target'
+          destination-github-username: 'AutoResearch'
+          destination-repository-name: 'autora-contributor-template'
+          target-branch: main
+
+      - name: Remove the generated folder
+        run: rm -rf ./generate_full/target
