@@ -53,7 +53,7 @@ def create_readme():
 
     shutil.copy(readme_src, readme_dist)
 
-    # rempove lines starting with {%
+    # remove lines starting with {%
     output_lines = []
     with open(readme_dist, "r") as file:
         for line in file:
