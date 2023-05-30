@@ -173,5 +173,5 @@ twine upload dist/*
 ## Questions & Help
 
 If you have any questions or require any help, please add your question in the 
-[Contributer Q&A of AutoRA Discussions](https://github.com/orgs/AutoResearch/discussions/categories/contributor-q-a).
+[Contributor Q&A of AutoRA Discussions](https://github.com/orgs/AutoResearch/discussions/categories/contributor-q-a).
 We look forward to hearing from you!
