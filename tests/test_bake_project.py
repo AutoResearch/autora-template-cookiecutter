@@ -386,12 +386,12 @@ def test_readme_population_by_contribution_type(cookies):
 
     # Assert presence and absence of appropriate headers
     ## Theorist
-    theorist_absent = ["### Experimentalist", "### Experiment Runners", "### Synthetic "]
+    theorist_absent = ["### Experimentalist", "### Experiment Runners"]
     assert '### Theorist' in d_readme['theorist [DEFAULT]'] and \
            all([s not in d_readme['theorist [DEFAULT]'] for s in theorist_absent])
 
     ## Experimentalist
-    experimentalist_absent = ["### Theorist", "### Experiment Runners", "### Synthetic "]
+    experimentalist_absent = ["### Theorist", "### Experiment Runners"]
     assert '### Experimentalist' in d_readme['experimentalist-sampler'] and \
            all([s not in d_readme['experimentalist-sampler'] for s in experimentalist_absent])
     assert '*Sampler*' in d_readme['experimentalist-sampler']
@@ -404,7 +404,7 @@ def test_readme_population_by_contribution_type(cookies):
 
     ## Experiment Runner
     ### Base Runner
-    er_absent = ["### Theorist", "### Experimentalist", "### Synthetic "]
+    er_absent = ["### Theorist", "### Experimentalist"]
     assert '### Experiment Runners' in d_readme['experiment_runner-experiment_runner'] and \
            all([s not in d_readme['experiment_runner-experiment_runner'] for s in er_absent])
     assert '*Recruitment Manager*' not in d_readme['experiment_runner-experiment_runner']
@@ -415,11 +415,8 @@ def test_readme_population_by_contribution_type(cookies):
     ### Recruitment manager
     assert '*Recruitment Manager*' in d_readme['experiment_runner-recruitment_manager']
     assert '*Experimentation Manager*' not in d_readme['experiment_runner-recruitment_manager']
-
-    ## Synthetic Data
-    sd_absent = ["### Theorist", "### Experimentalist", "### Experiment Runners"]
-    assert '### Synthetic' in d_readme['synthetic'] and \
-           all([s not in d_readme['synthetic'] for s in sd_absent])
+    ### Synthetic Data
+    assert '*Synthetic' in d_readme['experiment_runner-synthetic']
 
 
 def test_readme_population_by_options(cookies):
