@@ -73,7 +73,6 @@ enables the recruitment of participants via Prolific.*
 *Experimentation Manager* is a method (or collection of methods) to handle the requisite experimentation processes.<br>
 *Example: The [Firebase Experimentation Manager](https://github.com/AutoResearch/autora-experiment-runner-experimentation-manager-firebase)
 enables the hosting of a web-based experiment on Firebase and the storage of conditions and observations via Firestore.*
-{% endif -%}
 {% elif cookiecutter.__contrib_subtype_modulename == "synthetic" -%}
 *Synthetic*
 A ground-truth model that implements a hypothesized relationship between experimental conditions
@@ -81,6 +80,7 @@ $X$ and observations $Y$. Synthetic models may act as objects of study for which
 and be used for benchmarking theorists and experimentalists in AutoRA in terms of
 their ability to recover the underlying model from synthetic data, e.g., by acting as "synthetic participants".
 *Example: The basic [Synthetic Data Package](https://github.com/AutoResearch/autora-synthetic) implements simple models of economic choice and psychophysics.*
+{% endif -%}
 {% endif -%}
 
 ### Step 1: Implement Your Code
