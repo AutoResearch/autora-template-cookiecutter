@@ -187,7 +187,7 @@ example-contribution = ["autora-example-contribution==1.0.0"]
 !!! success
     Ensure you include the version number.
 
-Add the example-contribtuion to be part of the corresponding all dependency:
+Add the example-contribution to be part of the corresponding all-contribution-type dependencies:
 ```toml
 all-contribution-type = [
     ...
