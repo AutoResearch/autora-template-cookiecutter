@@ -170,6 +170,43 @@ twine upload dist/*
 ```
 {% endif -%}
 
+### Step 6: Add the package to [`autora`](https://github.com/autoresearch/autora)
+Once your package is working and published, you can **make a pull request** on 
+[`autora`](https://github.com/autoresearch/autora) to have it vetted and added to the "parent" package.
+To do so, you'll need to clone the parent repository, add your package to it as an optional dependency, and make sure your documentation is imported.
+Then create a pull request with the changes to let us know about your contribution.
+
+#### Add the package as optional dependency 
+In the `pyproject.toml` file of your cloned [`autora`](https://github.com/autoresearch/autora) package, 
+add an optional dependency for your new package in the `[project.optional-dependencies]` section:
+
+```toml
+example-contribution = ["autora-example-contribution==1.0.0"]
+```
+
+!!! success
+    Ensure you include the version number.
+
+Add the example-contribution to be part of the corresponding all-contribution-type dependencies:
+```toml
+all-contribution-type = [
+    ...
+    "autora[example-contribution]",
+    ...
+]
+```
+
+### Add documentation from the package repository
+Import your documentation in the `mkdocs.yml` of the [`autora`](https://github.com/autoresearch/autora) package:
+```yml
+- User Guide:
+  - Contribution Type:
+    - Overview: 'contribution-type/overview.md'
+    ...
+    - Example Contribution: '!import https://github.com/example-contributor/example-contribution/?branch=v1.0.0&extra_imports=["mkdocs/base.yml"]'
+    ...
+```
+
 ## Questions & Help
 
 If you have any questions or require any help, please add your question in the 
