@@ -171,7 +171,7 @@ twine upload dist/*
 {% endif -%}
 
 ### Step 6: Add the package to [`autora`](https://github.com/autoresearch/autora)
-Once your package is working, and you've published it on PyPI, you can **make a pull request** on 
+Once your package is working and published, you can **make a pull request** on 
 [`autora`](https://github.com/autoresearch/autora) to have it vetted and added to the "parent" package.
 First clone the repository, add the package as optional dependency and add documentation from the package repository.
 Then create a pull-request with the changes to let us know about your contribution.
