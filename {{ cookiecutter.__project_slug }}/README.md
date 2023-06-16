@@ -174,7 +174,7 @@ twine upload dist/*
 Once your package is working and published, you can **make a pull request** on 
 [`autora`](https://github.com/autoresearch/autora) to have it vetted and added to the "parent" package.
 To do so, you'll need to clone the parent repository, add your package to it as an optional dependency, and make sure your documentation is imported.
-Then create a pull-request with the changes to let us know about your contribution.
+Then create a pull request with the changes to let us know about your contribution.
 
 #### Add the package as optional dependency 
 In the `pyorject.toml` [`autora`](https://github.com/autoresearch/autora) package, 
