@@ -177,7 +177,7 @@ To do so, you'll need to clone the parent repository, add your package to it as 
 Then create a pull request with the changes to let us know about your contribution.
 
 #### Add the package as optional dependency 
-In the `pyorject.toml` [`autora`](https://github.com/autoresearch/autora) package, 
+In the `pyproject.toml` file of your cloned [`autora`](https://github.com/autoresearch/autora) package, 
 add an optional dependency for the package in the `[project.optional-dependencies]` section:
 
 ```toml
