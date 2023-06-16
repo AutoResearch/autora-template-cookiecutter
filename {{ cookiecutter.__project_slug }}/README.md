@@ -74,8 +74,8 @@ enables the recruitment of participants via Prolific.*
 *Example: The [Firebase Experimentation Manager](https://github.com/AutoResearch/autora-experiment-runner-experimentation-manager-firebase)
 enables the hosting of a web-based experiment on Firebase and the storage of conditions and observations via Firestore.*
 {% endif -%}
-{% elif cookiecutter.__contrib_type_modulename == "synthetic_data" -%}
-### Synthetic Data 
+{% elif cookiecutter.__contrib_subtype_modulename == "synthetic" -%}
+### Synthetic 
 A ground-truth model that implements a hypothesized relationship between experimental conditions
 $X$ and observations $Y$. Synthetic models may act as objects of study for which the underlying mechanisms are known, 
 and be used for benchmarking theorists and experimentalists in AutoRA in terms of
