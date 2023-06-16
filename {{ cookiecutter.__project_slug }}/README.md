@@ -178,7 +178,7 @@ Then create a pull request with the changes to let us know about your contributi
 
 #### Add the package as optional dependency 
 In the `pyproject.toml` file of your cloned [`autora`](https://github.com/autoresearch/autora) package, 
-add an optional dependency for the package in the `[project.optional-dependencies]` section:
+add an optional dependency for your new package in the `[project.optional-dependencies]` section:
 
 ```toml
 example-contribution = ["autora-example-contribution==1.0.0"]
