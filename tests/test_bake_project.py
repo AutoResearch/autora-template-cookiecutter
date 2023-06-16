@@ -349,7 +349,7 @@ def test_readme_populate_defaults(cookies):
 
 
 def test_readme_population_by_contribution_type(cookies):
-    l_contribution_types = ["theorist [DEFAULT]", "experimentalist", "experiment_runner", "synthetic_data"]
+    l_contribution_types = ["theorist [DEFAULT]", "experimentalist", "experiment_runner"]
     d_contribution_subtypes = {'experimentalist': ['pooler', 'sampler'],
                                'experiment_runner': ['experiment_runner', 'experimentation_manager',
                                                      'recruitment_manager']}
