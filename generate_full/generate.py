@@ -10,9 +10,9 @@ FOLDER_PATH = os.path.join(DIR, FOLDER_NAME)
 # Create the directory
 os.makedirs(FOLDER_PATH, exist_ok=True)
 
-contribution_types = ["theorist", "experimentalist", "experiment_runner", "synthetic_data"]
+contribution_types = ["theorist", "experimentalist", "experiment_runner"]
 experimentalist_subtype = ["sampler", "pooler"]
-runner_subtypes = ["experimentation_manager", "recruitment_manager"]
+runner_subtypes = ["experimentation_manager", "recruitment_manager", "synthetic"]
 
 
 def bake_contribution(contrib_type, sub_type=None):
