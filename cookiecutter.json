@@ -6,7 +6,7 @@
   "project_short_description": "Describe your contribution",
   "repository": "If you have already created a GitHub repository for your package, paste the url here. Otherwise, press Enter to skip",
   "__repository": "{% if cookiecutter.repository == 'If you have already created a GitHub repository for your package, paste the url here. Otherwise, press Enter to skip' -%}{% else -%}{{ cookiecutter.repository }}{% endif -%}",
-  "autora_contribution_type": ["theorist [DEFAULT]", "experimentalist", "experiment_runner", "synthetic_data", "custom"],
+  "autora_contribution_type": ["theorist [DEFAULT]", "experimentalist", "experiment_runner", "custom"],
   "custom_autora_contribution_type": "{% if cookiecutter.autora_contribution_type == 'custom' -%}Enter a name for your contribution type{% else -%}N/A - Press Enter to skip{% endif -%}",
   "__autora_contribution_type": "{% if cookiecutter.autora_contribution_type == 'custom' -%}{{ cookiecutter.custom_autora_contribution_type }}{% else -%}{{ cookiecutter.autora_contribution_type }}{% endif -%}",
   "experimentalist_type": [
