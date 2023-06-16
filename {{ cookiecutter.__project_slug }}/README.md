@@ -197,7 +197,7 @@ all-contribution-type = [
 ```
 
 ### Add documentation from the package repository
-Import the documentation in the `mkdocs.yml` of the [`autora`](https://github.com/autoresearch/autora) package:
+Import your documentation in the `mkdocs.yml` of the [`autora`](https://github.com/autoresearch/autora) package:
 ```yml
 - User Guide:
   - Contribution Type:
