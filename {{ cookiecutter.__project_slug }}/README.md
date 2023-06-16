@@ -80,7 +80,7 @@ A ground-truth model that implements a hypothesized relationship between experim
 $X$ and observations $Y$. Synthetic models may act as objects of study for which the underlying mechanisms are known, 
 and be used for benchmarking theorists and experimentalists in AutoRA in terms of
 their ability to recover the underlying model from synthetic data, e.g., by acting as "synthetic participants".
-*Example: The basic [Synthetic Data Package](https://github.com/AutoResearch/autora-synthetic-data) implements simple models of economic choice and psychophysics.*
+*Example: The basic [Synthetic Data Package](https://github.com/AutoResearch/autora-synthetic) implements simple models of economic choice and psychophysics.*
 {% endif -%}
 
 ### Step 1: Implement Your Code
