@@ -416,7 +416,7 @@ def test_readme_population_by_contribution_type(cookies):
     assert '*Recruitment Manager*' in d_readme['experiment_runner-recruitment_manager']
     assert '*Experimentation Manager*' not in d_readme['experiment_runner-recruitment_manager']
     ### Synthetic Data
-    assert '*Synthetic' in d_readme['experiment_runner-synthetic']
+    assert '*Synthetic*' in d_readme['experiment_runner-synthetic']
 
 
 def test_readme_population_by_options(cookies):
