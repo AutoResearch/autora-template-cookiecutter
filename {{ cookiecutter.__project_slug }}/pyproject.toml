@@ -6,7 +6,7 @@ authors = [{ name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.ema
 {% if cookiecutter.__contrib_utilities == "advanced" %}dynamic = ["version"]{% else %}version = "0.1.0"{% endif %}
 
 readme = "README.md"
-license = { text = "{{ cookiecutter.__license }}" }
+license = { file = "LICENSE" }
 requires-python = ">=3.8,<4"
 
 # ADD NEW DEPENDENCIES HERE
