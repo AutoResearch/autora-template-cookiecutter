@@ -350,12 +350,9 @@ def test_readme_populate_defaults(cookies):
 
 def test_readme_population_by_contribution_type(cookies):
     l_contribution_types = ["theorist [DEFAULT]", "experimentalist", "experiment_runner"]
-    d_contribution_subtypes = {'experimentalist': ['pooler', 'sampler'],
-                               'experiment_runner': ['experiment_runner', 'experimentation_manager',
+    d_contribution_subtypes = {'experiment_runner': ['experiment_runner', 'experimentation_manager',
                                                      'recruitment_manager', "synthetic"]}
     d_subtypes_raw = {
-        "sampler": "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}sampler [DEFAULT]{% else -%}N/A - Press Enter to skip{% endif -%}",
-        "pooler": "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}pooler{% else -%}N/A - Press Enter to skip{% endif -%}",
         "experiment_runner": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner [DEFAULT]{% else -%}N/A - Press Enter to skip{% endif -%}",
         "experimentation_manager": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experimentation_manager{% else -%}N/A - Press Enter to skip{% endif -%}",
         "recruitment_manager": "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}recruitment_manager{% else -%}N/A - Press Enter to skip{% endif -%}",
@@ -376,9 +373,7 @@ def test_readme_population_by_contribution_type(cookies):
         # If subtypes
         elif contriubtion_type in d_contribution_subtypes:
             for subtype in d_contribution_subtypes[contriubtion_type]:
-                if contriubtion_type == 'experimentalist':
-                    d_inputs["experimentalist_type"] = d_subtypes_raw[subtype]
-                elif contriubtion_type == 'experiment_runner':
+                if contriubtion_type == 'experiment_runner':
                     d_inputs["experiment_runner_type"] = d_subtypes_raw[subtype]
                 # Generate project and return readme contents
                 d_readme[f"{contriubtion_type}-{subtype}"] = \
@@ -392,15 +387,9 @@ def test_readme_population_by_contribution_type(cookies):
 
     ## Experimentalist
     experimentalist_absent = ["### Theorist", "### Experiment Runners"]
-    assert '### Experimentalist' in d_readme['experimentalist-sampler'] and \
-           all([s not in d_readme['experimentalist-sampler'] for s in experimentalist_absent])
-    assert '*Sampler*' in d_readme['experimentalist-sampler']
-    assert '*Pooler*' not in d_readme['experimentalist-sampler']
+    assert '### Experimentalist' in d_readme['experimentalist'] and \
+           all([s not in d_readme['experimentalist'] for s in experimentalist_absent])
 
-    assert '### Experimentalist' in d_readme['experimentalist-pooler'] and \
-           all([s not in d_readme['experimentalist-pooler'] for s in experimentalist_absent])
-    assert '*Pooler*' in d_readme['experimentalist-pooler']
-    assert '*Sampler*' not in d_readme['experimentalist-pooler']
 
     ## Experiment Runner
     ### Base Runner
