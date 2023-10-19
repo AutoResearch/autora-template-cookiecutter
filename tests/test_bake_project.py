@@ -204,58 +204,21 @@ def test_theorist(cookies):
 
 
 def test_experimentalist(cookies):
-    subtypes_raw = [
-        "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}sampler [DEFAULT]{% else -%}N/A - Press Enter to skip{% endif -%}",
-        "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}pooler{% else -%}N/A - Press Enter to skip{% endif -%}",
-        "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}custom{% else -%}N/A - Press Enter to skip{% endif -%}"]
-    subtypes = ['sampler [DEFAULT]', 'pooler', 'custom']
+    with bake_in_temp_dir(cookies, extra_context={"contribution_name": "test-experimentalist",
+                                                  "autora_contribution_type": "experimentalist",
+                                                  }) as result:
+        assert check_construct(result)
 
-    d_subtypes = {}
-    for i, (subtype, raw) in enumerate(zip(subtypes, subtypes_raw)):
-        d_inputs = {"contribution_name": "test-experimentalist",
-                    "autora_contribution_type": "experimentalist",
-                    "experimentalist_type": raw
-                    }
-        if subtype == 'custom':
-            d_inputs['custom_experimentalist_type'] = 'new-type'
+        assert 'autora-experimentalist-test-experimentalist' == os.path.basename(result.project)
 
-        with bake_in_temp_dir(cookies, extra_context=d_inputs) as result:
-            assert check_construct(result)
-
-            # Check source code tree structure
-            basename = os.path.basename(result.project)
-            l_tree = tree_list(result.project / 'src')
-            l_tree = [Path(s.split(basename)[1]) for s in l_tree]
-
-            # Add to dict
-            d_subtypes[subtype] = {'basename': basename, 'tree': l_tree}
-
-    # Check directory names
-    assert d_subtypes['sampler [DEFAULT]'][
-               'basename'] == 'autora-experimentalist-sampler-test-experimentalist'
-    assert d_subtypes['pooler'][
-               'basename'] == 'autora-experimentalist-pooler-test-experimentalist'
-    assert d_subtypes['custom'][
-               'basename'] == 'autora-experimentalist-new-type-test-experimentalist'
-
-    # Check directory trees
-    assert d_subtypes['sampler [DEFAULT]']['tree'] == convert_os_paths(
-        ['/src/autora', '/src/autora/experimentalist',
-         '/src/autora/experimentalist/sampler',
-         '/src/autora/experimentalist/sampler/test_experimentalist',
-         '/src/autora/experimentalist/sampler/test_experimentalist/__init__.py'])
-
-    assert d_subtypes['pooler']['tree'] == convert_os_paths(
-        ['/src/autora', '/src/autora/experimentalist',
-         '/src/autora/experimentalist/pooler',
-         '/src/autora/experimentalist/pooler/test_experimentalist',
-         '/src/autora/experimentalist/pooler/test_experimentalist/__init__.py'])
-
-    assert d_subtypes['custom']['tree'] == convert_os_paths(
-        ['/src/autora', '/src/autora/experimentalist',
-         '/src/autora/experimentalist/new_type',
-         '/src/autora/experimentalist/new_type/test_experimentalist',
-         '/src/autora/experimentalist/new_type/test_experimentalist/__init__.py'])
+        # Check source code tree structure
+        basename = os.path.basename(result.project)
+        l_tree = tree_list(result.project / 'src')
+        l_tree = [Path(s.split(basename)[1]) for s in l_tree]
+        assert l_tree == convert_os_paths(['/src/autora',
+                                           '/src/autora/experimentalist',
+                                           '/src/autora/experimentalist/test_experimentalist',
+                                           '/src/autora/experimentalist/test_experimentalist/__init__.py'])
 
 
 def test_runner(cookies):
@@ -338,7 +301,7 @@ def test_readme_populate_defaults(cookies):
     content = bake_and_return_readme(cookies, d_inputs)
 
     slug_text = f"(a sensible name for the repository would be " \
-                f"autora-theorist-{d_inputs['contribution_name'].lower().replace('_','-')})"
+                f"autora-theorist-{d_inputs['contribution_name'].lower().replace('_', '-')})"
     assert slug_text in content
 
     full_path_text = "add your code to `src/autora/theorist/test_readme/__init__.py`"
@@ -390,7 +353,6 @@ def test_readme_population_by_contribution_type(cookies):
     assert '### Experimentalist' in d_readme['experimentalist'] and \
            all([s not in d_readme['experimentalist'] for s in experimentalist_absent])
 
-
     ## Experiment Runner
     ### Base Runner
     er_absent = ["### Theorist", "### Experimentalist"]
@@ -414,7 +376,6 @@ def test_readme_population_by_options(cookies):
                                          "__contrib_utilities": "advanced"})
     assert '#### Step 5.2 Publish via GitHub Actions' in content_gh
     assert '#### Step 5.2: Publish via Twine' not in content_gh
-
 
     content_twine_no_dv = bake_and_return_readme(cookies,
                                                  {"contribution_name": "test_readme",
