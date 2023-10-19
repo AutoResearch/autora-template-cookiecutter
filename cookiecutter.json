@@ -9,12 +9,6 @@
   "autora_contribution_type": ["theorist [DEFAULT]", "experimentalist", "experiment_runner", "custom"],
   "custom_autora_contribution_type": "{% if cookiecutter.autora_contribution_type == 'custom' -%}Enter a name for your contribution type{% else -%}N/A - Press Enter to skip{% endif -%}",
   "__autora_contribution_type": "{% if cookiecutter.autora_contribution_type == 'custom' -%}{{ cookiecutter.custom_autora_contribution_type }}{% else -%}{{ cookiecutter.autora_contribution_type }}{% endif -%}",
-  "experimentalist_type": [
-    "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}sampler [DEFAULT]{% else -%}N/A - Press Enter to skip{% endif -%}",
-    "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}pooler{% else -%}N/A - Press Enter to skip{% endif -%}",
-    "{% if cookiecutter.autora_contribution_type == 'experimentalist' -%}custom{% else -%}N/A - Press Enter to skip{% endif -%}"],
-  "custom_experimentalist_type": "{% if cookiecutter.experimentalist_type == 'custom' -%}Enter a name for your experimentalist type{% else -%}N/A - Press Enter to skip{% endif -%}",
-  "__experimentalist_type": "{% if cookiecutter.autora_contribution_type == 'experimentalist' and cookiecutter.experimentalist_type == 'custom' -%}{{ cookiecutter.custom_experimentalist_type }}{% else -%}{{ cookiecutter.experimentalist_type }}{% endif -%}",
   "experiment_runner_type": [
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}experiment_runner [DEFAULT]{% else -%}N/A - Press Enter to skip{% endif -%}",
     "{% if cookiecutter.autora_contribution_type == 'experiment_runner' -%}synthetic{% else -%}N/A - Press Enter to skip{% endif -%}",
