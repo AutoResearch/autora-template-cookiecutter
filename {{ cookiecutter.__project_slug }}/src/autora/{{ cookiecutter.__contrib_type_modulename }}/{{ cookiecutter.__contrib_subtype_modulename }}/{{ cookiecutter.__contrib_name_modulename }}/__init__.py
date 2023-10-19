@@ -3,8 +3,9 @@
 Example Theorist
 """
 
-
+import numpy as np
 from sklearn.base import BaseEstimator
+
 
 
 class ExampleRegressor(BaseEstimator):
@@ -26,10 +27,10 @@ class ExampleRegressor(BaseEstimator):
     def __init__(self):
         pass
 
-    def fit(self, conditions, observations):
+    def fit(self, conditions: np.ndarray, observations: np.ndarray):
         pass
 
-    def predict(self, conditions):
+    def predict(self, conditions: np.ndarray) -> np.ndarray:
         pass
 {% elif cookiecutter.__contrib_type_modulename == "experimentalist" -%}
 """
@@ -38,12 +39,14 @@ Example Experimentalist
 import numpy as np
 import pandas as pd
 
+from typing import Union, List
+
 
 def sample(
         conditions: Union[pd.DataFrame, np.ndarray],
         models: List,
         reference_conditions: Union[pd.DataFrame, np.ndarray],
-        num_samples: int = 1) -> np.ndarray:
+        num_samples: int = 1) -> pd.DataFrame:
     """
     Add a description of the sampler here.
 
@@ -78,20 +81,24 @@ def sample(
 """
 Example Experiment Runner
 """
+import pandas as pd
+
+from typing import Union
 
 
-def example_runner(conditions):
+def example_runner(Union[pd.DataFrame, np.ndarray]) -> pd.DataFrame:
     """
     Add a description of the experiment runner here
 
     Args:
-        conditions: list of conditions to get observations for
-    Returns: observations
+        conditions: list of conditions for which to get observation
+    Returns:
+        experiment data (a dataframe with conditions and observations)
 
     """
-    observations = conditions
+    experiment_data = conditions
 
-    return observations
+    return experiment_data
 {% elif cookiecutter.__contrib_subtype_modulename == "experimentation_manager" -%}
 """
 Example Experimentation Manager
