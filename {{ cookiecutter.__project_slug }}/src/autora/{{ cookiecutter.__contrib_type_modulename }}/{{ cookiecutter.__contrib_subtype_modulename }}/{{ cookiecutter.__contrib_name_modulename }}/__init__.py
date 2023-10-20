@@ -3,8 +3,9 @@
 Example Theorist
 """
 
-
+import numpy as np
 from sklearn.base import BaseEstimator
+
 
 
 class ExampleRegressor(BaseEstimator):
@@ -26,28 +27,35 @@ class ExampleRegressor(BaseEstimator):
     def __init__(self):
         pass
 
-    def fit(self, conditions, observations):
+    def fit(self, conditions: np.ndarray, observations: np.ndarray):
         pass
 
-    def predict(self, conditions):
+    def predict(self, conditions: np.ndarray) -> np.ndarray:
         pass
 {% elif cookiecutter.__contrib_type_modulename == "experimentalist" -%}
-{% if cookiecutter.__contrib_subtype_modulename == "sampler" -%}
 """
-Example Experimentalist Sampler
+Example Experimentalist
 """
-
-
 import numpy as np
-from typing import Optional
+import pandas as pd
 
-def example_sampler(
-    condition_pool: np.ndarray, num_samples: Optional[int] = None) -> np.ndarray:
+from typing import Union, List
+
+
+def sample(
+        conditions: Union[pd.DataFrame, np.ndarray],
+        models: List,
+        reference_conditions: Union[pd.DataFrame, np.ndarray],
+        num_samples: int = 1) -> pd.DataFrame:
     """
     Add a description of the sampler here.
 
     Args:
-        condition_pool: pool of experimental conditions to evaluate
+        conditions: The pool to sample from.
+            Attention: `conditions` is a field of the standard state
+        models: The sampler might use output from the theorist.
+            Attention: `models` is a field of the standard state
+        reference_conditions: The sampler might use reference conditons
         num_samples: number of experimental conditions to select
 
     Returns:
@@ -63,74 +71,34 @@ def example_sampler(
 
     """
     if num_samples is None:
-        num_samples = condition_pool.shape[0]
+        num_samples = conditions.shape[0]
 
-    new_conditions = condition_pool
+    new_conditions = conditions
 
     return new_conditions[:num_samples]
-{% elif cookiecutter.__contrib_subtype_modulename == "pooler" -%}
-"""
-Example Experimentalist Pooler
-"""
-
-
-def example_pool(argument: float) -> float:
-    """
-    Add a description of the pooler here
-
-    Args:
-        argument: description of the argument
-    Returns: pool of experimental conditions
-
-    *Optional*
-    Examples:
-        These examples add documentation and also work as tests
-        >>> example_pool(1.)
-        1.0
-    """
-    new_conditions = argument
-
-    return new_conditions
-{% elif cookiecutter.__contrib_subtype_modulename != "not_applicable" -%}
-"""
-Example Experimentalist {{ cookiecutter.__contrib_type_modulename }}
-"""
-
-
-def example(argument: float) -> float:
-    """
-    Add a description here
-    Args:
-        argument: description of the argument
-    Returns: description of the return value
-
-    *Optional*
-    Examples: 
-        These examples add documentation and also work as tests
-        >>> example(1.)
-        1.0
-    """
-    return argument
-{% endif -%}
 {% elif cookiecutter.__contrib_type_modulename == "experiment_runner" -%}
 {% if cookiecutter.__contrib_subtype_modulename == "experiment_runner" -%}
 """
 Example Experiment Runner
 """
+import pandas as pd
+
+from typing import Union
 
 
-def example_runner(conditions):
+def example_runner(Union[pd.DataFrame, np.ndarray]) -> pd.DataFrame:
     """
     Add a description of the experiment runner here
 
     Args:
-        conditions: list of conditions to get observations for
-    Returns: observations
+        conditions: list of conditions for which to get observations
+    Returns:
+        experiment data (a dataframe with conditions and observations)
 
     """
-    observations = conditions
+    experiment_data = conditions
 
-    return observations
+    return experiment_data
 {% elif cookiecutter.__contrib_subtype_modulename == "experimentation_manager" -%}
 """
 Example Experimentation Manager

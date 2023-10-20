@@ -48,15 +48,10 @@ observations $Y$.<br>
 *Example: The [Bayesian Machine Scientist](https://github.com/AutoResearch/autora-theorist-bms) (Guimerà et al., 2020, 
 in Science Advances) returns an equation governing the relationship between $X$ and $Y$.* <br>
 {% elif cookiecutter.__contrib_type_modulename == "experimentalist" -%}
-### Experimentalist {{ cookiecutter.__experimentalist_type.capitalize() }}
+### Experimentalist
 A method that identifies novel experiment conditions $X'$ that yield scientific merit.
-{% if cookiecutter.__contrib_subtype_modulename == "pooler" -%} 
-*Pooler* generate a pool of novel experiment conditions.
-{% elif cookiecutter.__contrib_subtype_modulename == "sampler" -%}
-*Sampler* select from an existing pool of experiment conditions $X$).<br>
-*Example: The [Novelty Sampler](https://github.com/AutoResearch/autora-novelty-sampler) selects novel experiment 
+*Example: The [Novelty Experimentalist](https://github.com/AutoResearch/autora-experimentalist-novelty) selects novel experiment 
 conditions $X'$ with respect to a pairwise distance metric applied to existing experiment conditions $X$.*
-{% endif -%}
 {% elif cookiecutter.__contrib_type_modulename == "experiment_runner" -%}
 ### Experiment Runners
 A method that orchestrates the collecting of observations for a given set of 
