@@ -91,7 +91,7 @@ def example_runner(Union[pd.DataFrame, np.ndarray]) -> pd.DataFrame:
     Add a description of the experiment runner here
 
     Args:
-        conditions: list of conditions for which to get observation
+        conditions: list of conditions for which to get observations
     Returns:
         experiment data (a dataframe with conditions and observations)
 
