@@ -2,12 +2,14 @@
 
 ## Quickstart Guide
 
-### Create GitHub Repository
+### Link to GitHub Repository
 
-You should create a GitHub repository from the root folder of this project:
-- Create a new repository on GitHub (a sensible name for the repository would be {{ cookiecutter.__project_slug }})
-- Follow the guide under `…or push an existing repository from the command line
-` 
+You should link the root folder of this project to an existing repository on GitHub. 
+
+1. First, initialize your local project folder with `git init`.
+2. If you don't have a remote repository yet, you should create one on GitHub (a sensible name for the repository would be {{ cookiecutter.__project_slug }}).  If you already have a remote repository on Github, you can jump to Step 3. 
+3. Link the local project folder to the remote repository via `git remote add origin https://github.com/OWNER/REPOSITORY.git`. See [this guide](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories) for more instructions.
+4. To ensure that the remote repository has been added correctly, you can run `git remote -v `from within the project folder.
 
 ### Virtual Environment 
 Install this in an environment using your chosen package manager. In this example we are using virtualenv
@@ -47,11 +49,15 @@ An sklearn regressor that returns an interpretable model relating experiment con
 observations $Y$.<br>
 *Example: The [Bayesian Machine Scientist](https://github.com/AutoResearch/autora-theorist-bms) (Guimerà et al., 2020, 
 in Science Advances) returns an equation governing the relationship between $X$ and $Y$.* <br>
+
+More information on how to implement an AutoRA theorist component can be found in the respective [contributor documentation](https://autoresearch.github.io/autora/contribute/modules/theorist/).
 {% elif cookiecutter.__contrib_type_modulename == "experimentalist" -%}
 ### Experimentalist
 A method that identifies novel experiment conditions $X'$ that yield scientific merit.
 *Example: The [Novelty Experimentalist](https://github.com/AutoResearch/autora-experimentalist-novelty) selects novel experiment 
-conditions $X'$ with respect to a pairwise distance metric applied to existing experiment conditions $X$.*
+conditions $X'$ with respect to a pairwise distance metric applied to existing experiment conditions $X$.* <br>
+
+More information on how to implement an AutoRA experimentalist component can be found in the respective [contributor documentation](https://autoresearch.github.io/autora/contribute/modules/experimentalist/).
 {% elif cookiecutter.__contrib_type_modulename == "experiment_runner" -%}
 ### Experiment Runners
 A method that orchestrates the collecting of observations for a given set of 
@@ -60,6 +66,9 @@ experiment conditions, which may include the recruitment of participants.<br>
 enables the collection of behavioral data from human participants via web-based experiments hosted on 
 [Firebase](https://firebase.google.com/), using a pool of participants registered through
 [Prolific](https://www.prolific.co/).* <br>
+
+More information on how to implement an AutoRA experiment runner component can be found in the respective [contributor documentation](https://autoresearch.github.io/autora/contribute/modules/experiment-runner/).
+
 {% if cookiecutter.__contrib_subtype_modulename == "recruitment_manager" -%}
 *Recruitment Manager* is a method (or collection of methods) to recruit participants.<br>
 *Example: The [Prolific Recruitment Manager](https://github.com/AutoResearch/autora-experiment-runner-recruitment-manager-prolific)
