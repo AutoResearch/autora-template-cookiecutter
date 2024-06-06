@@ -2,6 +2,7 @@
 """
 Example Theorist
 """
+from typing import Union
 
 import numpy as np
 from sklearn.base import BaseEstimator
@@ -27,10 +28,13 @@ class ExampleRegressor(BaseEstimator):
     def __init__(self):
         pass
 
-    def fit(self, conditions: np.ndarray, observations: np.ndarray):
+    def fit(self,
+            conditions: Union[pd.DataFrame, np.ndarray],
+            observations: Union[pd.DataFrame, np.ndarray]):
         pass
 
-    def predict(self, conditions: np.ndarray) -> np.ndarray:
+    def predict(self,
+                conditions: Union[pd.DataFrame, np.ndarray]) -> Union[pd.DataFrame, np.ndarray]:
         pass
 {% elif cookiecutter.__contrib_type_modulename == "experimentalist" -%}
 """
