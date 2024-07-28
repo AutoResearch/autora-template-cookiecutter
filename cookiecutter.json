@@ -18,6 +18,7 @@
   "advanced_contribution_utilities": ["basic contribution [DEFAULT]", "advanced contribution (dynamic versioning, GitHub actions, pre-commit hooks)"],
   "__contrib_utilities": "{% if cookiecutter.advanced_contribution_utilities == 'basic contribution [DEFAULT]' -%}basic{% else -%}advanced{% endif -%}",
   "license": ["MIT license [DEFAULT]", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
+  "use_current_directory": ["no [DEFAULT]", "yes"],
   "__license": "{{ cookiecutter.license.replace( ' [DEFAULT]', '') }}",
   "__contrib_type_modulename": "{{ cookiecutter.__autora_contribution_type.replace(' [DEFAULT]', '').lower().replace(' ', '_').replace('-', '_')  }}",
   "__contrib_subtype_modulename": "{{ cookiecutter.__contrib_subtype.replace(' [DEFAULT]', '').lower().replace(' ', '_').replace('-', '_')  }}",
